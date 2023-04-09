@@ -1,14 +1,13 @@
-import React from "react";
 import {
     CurrencyIcon,
     Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import "./styles.css"
+import burgerConstructor from "./burger-constructor.module.css"
 
-const Order = ({ finalPrice}) => {
+const Order = ({ finalPrice, openModal}) => {
     return (
-        <div className="text_price">
+        <div className={burgerConstructor.text_price}>
             {finalPrice}
             <CurrencyIcon type="primary"/>
             <Button
@@ -16,6 +15,7 @@ const Order = ({ finalPrice}) => {
                 type="primary"
                 size="large"
                 extraClass="order-button-position"
+                onClick={() => openModal(true, "order")}
             >
                 Оформить заказ
             </Button>
@@ -28,6 +28,10 @@ Order.propTypes = {
         Конечная цена бургера
     */
     finalPrice: PropTypes.number,
+    /*
+       Функция вызова модального окна
+    */
+    openModal: PropTypes.func.isRequired
 };
 
-export default Order
+export {Order}

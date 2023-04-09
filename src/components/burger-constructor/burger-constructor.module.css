@@ -1,10 +1,8 @@
 .elements_position {
     list-style: none;
     padding-left: 0;
-    height: 463px;
-    /* overflow-y: scroll; */
+    height: 505px;
     overflow-x: hidden;
-    margin-left: -30px;
 }
 
 ul {
@@ -20,14 +18,26 @@ ul {
     left: 150px;
 }
 
-.constructor-element {
-    position: relative;
-    left: 35px;
-    margin: 5px 0 5px 0;
-}
 .order-button-position {
     position: relative;
     display: flex;
     left: 175px;
     bottom: 45px;
+}
+
+.burger_box {
+    position: relative;
+    width: 600px;
+    height: 912px;
+    background: #131316;
+    margin: 0 20px 0;
+}
+.top {
+    position: relative;
+    left: 24px
+}
+
+.elements_position_burger {
+    position: relative;
+    margin: 2px
 }

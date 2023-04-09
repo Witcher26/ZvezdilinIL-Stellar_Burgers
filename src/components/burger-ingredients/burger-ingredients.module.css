@@ -1,4 +1,4 @@
- .text_type_main-large{
+.text_type_main-large {
     position: absolute;
     width: 600px;
     height: 40px;
@@ -8,30 +8,8 @@
     font-size: 36px;
     line-height: 40px;
     display: flex;
-    /* align-items: center; */
     left: 20px;
-
     color: #F2F2F3;
- }
-
- .burger-box {
-    position: relative;
-    width: 600px;
-    height: 912px;
-    background: #131316;
-    border: 2px solid #4C4CFF;
-    margin: 0 20px 0;
-    /* overflow-y: scroll; */
-    /* overflow-x: hidden; */
-    
- }
-
- .burger-text-position {
-    position: relative;
-    top: 90px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 820px;
  }
 
  .ingredient_item {
@@ -40,7 +18,7 @@
     align-items: center;
     position: relative;
     cursor: pointer;
- } */
+ } 
 
  .ingredient_item_name {
     height: 48px;
@@ -52,19 +30,14 @@
     align-items: center;
     position: relative;
     cursor: pointer;
- } */
+ } 
 
- .list{
+ .list {
 	list-style-type: none;
-    overflow-y: scroll;
-    overflow-x: hidden;
-} */
-
-#dispaly_inline li {
-    display: inline;
-}
+} 
 
 .dispaly_grid {
+    position: absolute;
     display: grid;
     grid-template-columns: 1fr 1fr;
     list-style: none;
@@ -81,4 +54,50 @@ ul  {
 
 .display_flex {
     display: flex;
+}
+
+.image_position {
+    position: relative;
+    display: flex;
+    left: 117px;
+}
+
+.igredient_name {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+.propertyes {
+    position: relative;
+    display: flex;
+    margin: 0 59px 0;
+    top: 70px;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.text_position {
+    text-align: center;
+    flex-direction: row;
+}
+
+.burger_box {
+    position: relative;
+    width: 600px;
+    height: 912px;
+    background: #131316;
+    margin: 0 20px 0;
+}
+
+.burger_text_position {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 700px;
+}
+
+.list_style_type_none {
+    list-style-type: none;
+    bottom: 90px;
+    position: relative;
 }
