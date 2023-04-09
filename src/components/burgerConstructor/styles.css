@@ -1,0 +1,33 @@
+.elements_position {
+    list-style: none;
+    padding-left: 0;
+    height: 463px;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+    margin-left: -30px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.text_price {
+    font-family: 'Iceland';
+    font-size: 45px;
+    bottom: -38px;
+    position: relative;
+    left: 150px;
+}
+
+.constructor-element {
+    position: relative;
+    left: 35px;
+    margin: 5px 0 5px 0;
+}
+.order-button-position {
+    position: relative;
+    display: flex;
+    left: 175px;
+    bottom: 45px;
+}

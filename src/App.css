@@ -1,0 +1,12 @@
+.App-header {
+  background-color: #000000;
+  display: flex;
+}
+.components-position {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 360px;
+    top: 140px;
+}
