@@ -1,0 +1,17 @@
+.header {
+    background: #131316;
+    padding: 16px 0;
+}
+
+.text_color {
+    border-radius: 40px;
+    color: #8585ad;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-left: 110px;
+    margin-right: 285px;
+}

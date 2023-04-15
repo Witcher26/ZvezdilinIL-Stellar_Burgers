@@ -1,0 +1,43 @@
+.elements_position {
+    list-style: none;
+    padding-left: 0;
+    height: 505px;
+    overflow-x: hidden;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.text_price {
+    font-family: 'Iceland';
+    font-size: 45px;
+    bottom: -38px;
+    position: relative;
+    left: 150px;
+}
+
+.order-button-position {
+    position: relative;
+    display: flex;
+    left: 175px;
+    bottom: 45px;
+}
+
+.burger_box {
+    position: relative;
+    width: 600px;
+    height: 912px;
+    background: #131316;
+    margin: 0 20px 0;
+}
+.top {
+    position: relative;
+    left: 24px
+}
+
+.elements_position_burger {
+    position: relative;
+    margin: 2px
+}

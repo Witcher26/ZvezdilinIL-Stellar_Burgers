@@ -1,0 +1,103 @@
+.text_type_main-large {
+    position: absolute;
+    width: 600px;
+    height: 40px;
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    display: flex;
+    left: 20px;
+    color: #F2F2F3;
+ }
+
+ .ingredient_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+ } 
+
+ .ingredient_item_name {
+    height: 48px;
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+ } 
+
+ .list {
+	list-style-type: none;
+} 
+
+.dispaly_grid {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+    margin-right: 40px;
+}
+
+p {
+    display: flex;
+}
+
+ul  {
+    display: flex;
+}
+
+.display_flex {
+    display: flex;
+}
+
+.image_position {
+    position: relative;
+    display: flex;
+    left: 117px;
+}
+
+.igredient_name {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+.propertyes {
+    position: relative;
+    display: flex;
+    margin: 0 59px 0;
+    top: 70px;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.text_position {
+    text-align: center;
+    flex-direction: row;
+}
+
+.burger_box {
+    position: relative;
+    width: 600px;
+    height: 912px;
+    background: #131316;
+    margin: 0 20px 0;
+}
+
+.burger_text_position {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 700px;
+}
+
+.list_style_type_none {
+    list-style-type: none;
+    bottom: 90px;
+    position: relative;
+}

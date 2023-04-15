@@ -1,0 +1,16 @@
+.text_position {
+    text-align: center;
+}
+
+.display_flex {
+    display: flex ;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkMarkIcon_position {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 110px;
+}
