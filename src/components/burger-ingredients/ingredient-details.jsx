@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import ingredientDetails from "./burger-ingredients.module.css"
+import { useSelector } from "react-redux";
 
-function IngredientDetails({currentIngredient}) {
+function IngredientDetails() {
+    const currentIngredient = useSelector((store) => store.currentIngredient);
     const generateMarkup = element => {
         const {
             image_large,

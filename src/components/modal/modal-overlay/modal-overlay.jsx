@@ -1,10 +1,11 @@
+import React from "react";
+import modalOverlayStyles from "./modal-overlay.module.css";
 import PropTypes from "prop-types";
-import modal from "./modal.module.css"
 
 const ModalOverlay = ({ handleCloseModal, children }) => {
     return (
         <div
-            className={modal.overlay}
+            className={modalOverlayStyles.overlay}
             onClick={handleCloseModal}
             aria-hidden="true"
         >
@@ -14,13 +15,7 @@ const ModalOverlay = ({ handleCloseModal, children }) => {
 };
 
 ModalOverlay.propTypes = {
-    /*
-        Функция закрытия модального окна
-    */
     handleCloseModal: PropTypes.func.isRequired,
-    /*
-        Составляющая модального окна
-    */
     children: PropTypes.node,
 };
 

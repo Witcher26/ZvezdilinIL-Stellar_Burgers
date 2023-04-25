@@ -1,6 +1,6 @@
 import React from 'react';
 import AppHeader from '../app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients/burger-ingredients';
 
 import BurgerConstructor from '../burger-constructor';
 import Modal from '../modal/modal';
@@ -9,108 +9,85 @@ import OrderDetails from '../burger-ingredients/ingredient-details/order-details
 
 import app from "./app.module.css";
 
-const url = "https://norma.nomoreparties.space/api/ingredients";
+import { useDispatch, useSelector } from "react-redux";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+import { 
+        getIngredients,
+        SET_ACTIVE_INGREDIENT,
+        DRAG_CONSTRUCTOR_INGREDIENTS,
+        INCREASE_INGREDIENT,
+        DRAG_BUN_INGREDIENT,
+        CLOSE_MODAL
+} from '../../services/actions/actions';
+
+import { v4 as uuid } from "uuid";
+import { baseUrl } from '../../env';
+
+const ingredientsUrl = baseUrl+"ingredients";
 
 function App() {
-    const [modal, handleModal] = React.useState({
-        ingredientsModal: false,
-        orderModal: false,
-    });
+    const ingredientsModal = useSelector(store => store.ingredientsModal);
+    const orderModal = useSelector(store => store.orderModal);
 
-    const onHandleModal = (flag, type = "") => {
-        if (flag) {
-            if (type === "ingredients") {
-                handleModal({
-                    ...modal,
-                    ingredientsModal: true,
-                });
-            } else if (type === "order") {
-                handleModal({
-                    ...modal,
-                    orderModal: true,
-                });
-            }
+    const dispatch = useDispatch();
+    const dispatchModal = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(getIngredients(ingredientsUrl));
+    }, []);
+
+    const onDropHandler = item => {
+        dispatch({
+            type: SET_ACTIVE_INGREDIENT,
+            currentIngredient: item,
+        })
+
+        if (item.type !== "bun") {
+            dispatch({
+                type: DRAG_CONSTRUCTOR_INGREDIENTS,
+                item: { ...item, key: uuid() },
+            })
+            dispatch({
+                type: INCREASE_INGREDIENT,
+                id: item._id,
+            })
         } else {
-            handleModal({
-                ingredientsModal: false,
-                orderModal: false,
-            });
+            dispatch({
+                type: DRAG_BUN_INGREDIENT,
+                payload: { ...item, qty: ++item.qty },
+            })
         }
     };
 
-    const [currentIngredient, setActiveIngredient] = React.useState({});
-
-    const [state, setState] = React.useState({
-        ingredientsData: [],
-        loading: true,
-        error: false,
-    });
-
-    const getIngredientsData = React.useCallback(() => {
-        setState({ ...state, loading: true });
-        fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(`Ошибка ${response.status}`);
-            })
-            .then(response => {
-                setState(state => ({
-                    ...state,
-                    ingredientsData: response.data,
-                    loading: false,
-                }));
-            })
-            .catch(error => {
-                setState({ 
-                    ...state, 
-                    error: true, 
-                    loading: false 
-            });
-                console.log(error.message);
-            });
-    }, [state]);
-
-    React.useEffect(() => {
-        getIngredientsData();
-    }, [])
-
-    const getActiveIngredient = item => {
-        setActiveIngredient(item);
+    const handleCloseModal = () => {
+        dispatchModal({ type: CLOSE_MODAL });
+        dispatchModal({ type: SET_ACTIVE_INGREDIENT, currentIngredient: {} });
     };
 
     return (
         <div className={app.page}>
             <AppHeader/>
-            {state.ingredientsData.length > 0 && 
-                <div className={app.position}>
-                    <BurgerIngredients data={state.ingredientsData}
-                                    getActiveIngredient={getActiveIngredient}
-                                    openModal={onHandleModal}
-                    
-                    />
-                    <BurgerConstructor data={state.ingredientsData}
-                                    openModal={onHandleModal}/>
-                </div>}
-            {modal.ingredientsModal && (
-                <Modal
+            <div className={app.position}>
+                <DndProvider backend={HTML5Backend}>
+                    <BurgerIngredients/>
+                    <BurgerConstructor onDrop={onDropHandler}/>
+                </DndProvider>
+            </div>
+
+            {ingredientsModal && 
+                <Modal 
                     modalTitle="Детали ингредиента"
-                    closeModal={handleModal}
+                    handleCloseModal={handleCloseModal}
                 >
-                    <IngredientDetails
-                        currentIngredient={currentIngredient}
-                        closeModal={onHandleModal}
-                    />
-                </Modal>
-            )}
-            {modal.orderModal && (
-                <Modal
-                    closeModal={handleModal}
-                >
-                    <OrderDetails closeModal={onHandleModal}/>
-                </Modal>
-            )} 
+                    <IngredientDetails/>
+                </Modal>}
+
+            {orderModal &&
+                <Modal handleCloseModal={handleCloseModal}>
+                    <OrderDetails/>
+                </Modal>} 
         </div>
     );
 }
