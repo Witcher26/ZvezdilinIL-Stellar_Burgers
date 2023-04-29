@@ -1,4 +1,4 @@
-.elements_position {
+/* .elements_position {
     list-style: none;
     padding-left: 0;
     height: 505px;
@@ -40,4 +40,20 @@ ul {
 .elements_position_burger {
     position: relative;
     margin: 2px
+} */
+
+.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 536px;
+}
+
+.hovered_block {
+    border: 1px dashed lightgray;
+}
+
+.bun_container {
+    display: flex;
 }

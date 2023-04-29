@@ -1,10 +1,12 @@
 import {CheckMarkIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import orderDetails from "./order-details.module.css"
+import { useSelector } from "react-redux";
 
 function OrderDetails() {
+    const order = useSelector((store) => store.order);
     return (
         <div className={orderDetails.display_flex}>
-            <p className="text text_type_digits-large pb-8">034536</p>
+            <p className="text text_type_digits-large pb-8">{order.number}</p> {/*//удалить второй order*/}
             <p className="text text_type_main-medium pb-15">
                 идентификатор заказа
             </p>

@@ -1,3 +1,3 @@
-import BurgerIngredients from './burger-ingredients';
+import BurgerIngredients from './burger-ingredients/burger-ingredients';
 
 export default BurgerIngredients
