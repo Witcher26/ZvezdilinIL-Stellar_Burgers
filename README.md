@@ -11,7 +11,7 @@ Istall all node_modules
 
 ### `npm start`
 
-## 3.0.0-master (29.04.2023 - release )
+## 3.0.0-master (29.04.2023 - release)
 - `bugfix`: общая логика проверки ответа во всех запросах вынесена в отдельную функцию checkResponse директории utils
 - `bugfix`: убраны экшены для конкретных попапов из Modal
 - `bugfix`: удалён getIngredientsData из App. Заменён на вызов thunk с запросом ингредиентов.
@@ -27,7 +27,7 @@ Istall all node_modules
 - `feature`: инициализировано хранилище Redux
 - `feature`: добавлены зависимости react-redux, redux-thunk, redux, react-dnd, react-dnd-html5-backend, uuid
 
-## 2.0.0-master (15.04.2023 - release )
+## 2.0.0-master (15.04.2023 - release)
 - `feature`: компоненты добавлены в index.js
 - `bugfix`: В BurgerConstructor исравлен баг с подчётом финальной цены. Применён метод массива reduce вместо forEach
 - `bugfix`: Удаление неиспользуемых стилей в модулях css
@@ -35,7 +35,7 @@ Istall all node_modules
 - `feature`: Добавлены компоненты главной страницы: Modal и ModalOverlay
 - `feature`: Подключиение к API https://norma.nomoreparties.space/api/ingredients
 
-## 1.0.0-master (08.04.2023 - release )
+## 1.0.0-master (08.04.2023 - release)
 - `feature`: Вёрстка BurgerConstructor - компонента
 - `feature`: Вёрстка BurgerIngredients - компонент
 - `feature`: Вёрстка AppHeader - компонента
