@@ -7,18 +7,15 @@ import {
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
+import { useLocation, Link } from "react-router-dom";
 
 const IngredientItem = ({ ingredient }) => {
     const { image, price, name } = ingredient;
-    const constructorIngredients = useSelector(
-        (store) => store.constructorIngredients
-    );
 
-    const bun = useSelector((store) => store.bun);
+    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
+    const bun = useSelector(store => store.ingredientsReducer.bun);
 
-    const currentElAmount = constructorIngredients.filter((item) => {
-        return item._id === ingredient._id;
-    }).length;
+    const currentElAmount = constructorIngredients.filter(item => item._id === ingredient._id).length;//убрать return
 
     const [{ isDrag }, dragRef] = useDrag({
         type: ingredient.type,
@@ -47,22 +44,31 @@ const IngredientItem = ({ ingredient }) => {
     };
 
     const count = renderCounter();
+    const location = useLocation();
+    const ingredientId = ingredient._id;
 
     return (
         !isDrag && (
-            <div ref={dragRef} className={`${burgerItem.card} mb-10 ml-3 mr-3`}>
-                {count}
-                <img className="ml-4 mr-4" src={image} alt={name} />
-                <p className={`${burgerItem.price} mt-1 mb-1`}>
-                    <span className="text text_type_digits-default mr-2">
-                        {price}
-                    </span>
-                    <CurrencyIcon type="primary" />
-                </p>
-                <p className={`${burgerItem.name} text text_type_main-default`}>
-                    {name}
-                </p>
-            </div>
+            <Link key={ingredientId}
+                  to={`/ingredients/${ingredientId}`}
+                  state={{ background: location }}
+                  className={burgerItem.link}
+            
+            >
+                <div ref={dragRef} className={`${burgerItem.card} mb-10 ml-3 mr-3`}>
+                    {count}
+                    <img className="ml-4 mr-4" src={image} alt={name} />
+                    <p className={`${burgerItem.price} mt-1 mb-1`}>
+                        <span className="text text_type_digits-default mr-2">
+                            {price}
+                        </span>
+                        <CurrencyIcon type="primary" />
+                    </p>
+                    <p className={`${burgerItem.name} text text_type_main-default`}>
+                        {name}
+                    </p>
+                </div>
+            </Link>
         )
     );
 };

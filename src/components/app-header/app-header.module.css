@@ -9,9 +9,28 @@
     text-decoration: none;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    justify-content: center;
 }
 
 .logo {
     margin-left: 110px;
     margin-right: 285px;
+}
+
+.link {
+    border-radius: 40px;
+    color: #8585ad;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.link_active {
+    composes: link;
+    color: #fff;
+}
+
+.link_active svg {
+    fill: #fff;
 }

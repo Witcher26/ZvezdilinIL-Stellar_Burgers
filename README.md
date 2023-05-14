@@ -6,41 +6,38 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn istall`
+Istall all node_modules
+
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 3.0.0-master (29.04.2023 - release)
+- `bugfix`: общая логика проверки ответа во всех запросах вынесена в отдельную функцию checkResponse директории utils
+- `bugfix`: убраны экшены для конкретных попапов из Modal
+- `bugfix`: удалён getIngredientsData из App. Заменён на вызов thunk с запросом ингредиентов.
+- `bugfix`: апи 'https://norma.nomoreparties.space/api/ вынесен в общую константу env.js для последующего добалвения в .env
+- `bugfix`: убрана логика добавления ингредиента в заказ при клике на него (теперь через Dnd)
+- `bugfix`: исравлено открытие заказа при нажатии на ингредиенты
+- `feature`: добавлена логика DnD, Redux и усилителей
+- `feature`: добавлен уникальный uuid для ингредиентов в заказе
+- `bugfix`: исправлен баг с прокруткой хидера игредиентов при скролле
+- `feature`: реализоавно добавление данных о количестве добавленных игредиентов в IngredientDetails
+- `feature`: реализоавно получение и обновление номера заказа в модальном окне OrderDetails
+- `feature`: реализовано получение списка ингредиентов от API в компоненте BurgerIngredients
+- `feature`: инициализировано хранилище Redux
+- `feature`: добавлены зависимости react-redux, redux-thunk, redux, react-dnd, react-dnd-html5-backend, uuid
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 2.0.0-master (15.04.2023 - release)
+- `feature`: компоненты добавлены в index.js
+- `bugfix`: В BurgerConstructor исравлен баг с подчётом финальной цены. Применён метод массива reduce вместо forEach
+- `bugfix`: Удаление неиспользуемых стилей в модулях css
+- `feature`: Добавлены компоненты содержимого модальных окон: IngredientDetails и OrderDetails
+- `feature`: Добавлены компоненты главной страницы: Modal и ModalOverlay
+- `feature`: Подключиение к API https://norma.nomoreparties.space/api/ingredients
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 1.0.0-master (08.04.2023 - release)
+- `feature`: Вёрстка BurgerConstructor - компонента
+- `feature`: Вёрстка BurgerIngredients - компонент
+- `feature`: Вёрстка AppHeader - компонента
+- `feature`: Установлена библиотека UI-компонентов
+- `feature`: Создана --template typescript CRA - заготовка со структурой папок под компоненты

@@ -56,12 +56,6 @@ ul  {
     display: flex;
 }
 
-.image_position {
-    position: relative;
-    display: flex;
-    left: 117px;
-}
-
 .igredient_name {
     position: relative;
     display: flex;

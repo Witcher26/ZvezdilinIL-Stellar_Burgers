@@ -2,13 +2,11 @@ import React from "react";
 import burgerIngredients from "./burger-ingredients.module.css"
 import IngredientsOptions from "../ingredients-options.jsx";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SET_CURRENT_TAB } from "../../../services/actions/actions.js";
-// import styles from "./"
 import TabList from "../tab-list/tab-list.jsx";
 
 const BurgerIngredients = () => {
-    // const ingredientsModal = useSelector((store) => store.ingredientsModal); //вынести в модалку
     const listRef = React.useRef(null);
     const dispatch = useDispatch();
 

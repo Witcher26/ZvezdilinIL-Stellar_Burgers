@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import styles from "./styles.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
@@ -6,9 +6,7 @@ import { useSelector } from "react-redux";
 
 const TabList = forwardRef(function TabList({ scrollByTabClick }, ref) {
     const current = useSelector((store) => store.currentTab);
-    const handleClick = (element) => {
-        scrollByTabClick(element);
-    };
+    const handleClick = element => {scrollByTabClick(element)};
 
     return (
         <div className={`${styles.tab_list}`} ref={ref}>

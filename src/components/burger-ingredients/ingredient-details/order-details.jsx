@@ -3,7 +3,7 @@ import orderDetails from "./order-details.module.css"
 import { useSelector } from "react-redux";
 
 function OrderDetails() {
-    const order = useSelector((store) => store.order);
+    const order = useSelector(store => store.orderReducer.order);
     return (
         <div className={orderDetails.display_flex}>
             <p className="text text_type_digits-large pb-8">{order.number}</p> {/*//удалить второй order*/}

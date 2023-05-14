@@ -1,4 +1,4 @@
-import BurgerIngredients from './burgerIngredients';
+import BurgerIngredients from './burger-ingredients';
 import AppHeader from './app-header';
 import BurgerConstructor from './burger-constructor';
 
