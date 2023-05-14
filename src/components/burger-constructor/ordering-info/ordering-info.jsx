@@ -8,24 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { OPEN_ORDER_MODAL, submitOrder } from "../../../services/actions/actions";
 import { baseUrl } from "../../../env";
 
-const urlOrders = baseUrl + "orders";
+const urlOrders = baseUrl + "/orders";
 
 const OrderingInfo = ({ finalPrice }) => {
-    // const _orderUrl = "https://norma.nomoreparties.space/api/orders";
-    const constructorIngredients = useSelector(
-        (store) => store.constructorIngredients
-    );
-    const bun = useSelector((store) => store.bun);
+    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
+    const bun = useSelector(store => store.bun);
+    const user = useSelector(store => store.formReducer.userInfo);
 
-    const ingredientsIdArray = constructorIngredients.map((item) => item._id);
+    const ingredientsIdArray = constructorIngredients.map(item => item._id);
+
     const resultIdArr = bun
         ? [bun._id, ...ingredientsIdArray, bun._id]
         : [...ingredientsIdArray];
     const dispatch = useDispatch();
 
     const makeOrder = () => {
-        dispatch(submitOrder(urlOrders, resultIdArr));
-        dispatch({ type: OPEN_ORDER_MODAL });
+        if (user) {
+            dispatch(submitOrder(urlOrders, resultIdArr));
+            dispatch({ type: OPEN_ORDER_MODAL });
+        } else {
+            alert("Только авторизованные пользователи могут делать заказы!")
+        }
     };
 
     return (

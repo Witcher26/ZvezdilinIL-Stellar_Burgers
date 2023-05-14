@@ -1,0 +1,35 @@
+.form_container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    margin-top: 180px;
+}
+
+.form_container h1 {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form button {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.input {
+    appearance: none;
+}
+
+.form_info {
+    display: flex;
+    justify-content: center;
+}
+
+.form_info_link {
+    text-decoration: none;
+    color: #4c4cff;
+}
