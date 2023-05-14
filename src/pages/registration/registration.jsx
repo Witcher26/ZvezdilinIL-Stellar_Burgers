@@ -19,7 +19,7 @@ export const RegisterPage = () => {
 
     const navigate = useNavigate();
 
-    const changeInputValue = (e) => {
+    const changeInputValue = e => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
@@ -27,7 +27,7 @@ export const RegisterPage = () => {
 
     const dispatch = useDispatch();
 
-    const submitForm = (e) => {
+    const submitForm = e => {
         e.preventDefault();
         dispatch(registerUser(_registerUrl, formValues));
         navigate("/", {

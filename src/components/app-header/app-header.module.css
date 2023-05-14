@@ -3,19 +3,17 @@
     padding: 16px 0;
 }
 
-.text_color {
-    border-radius: 40px;
-    color: #8585ad;
-    text-decoration: none;
+.nav {
     display: flex;
     align-items: center;
-    cursor: pointer;
-    justify-content: center;
+    width: 100%;
+    max-width: 1290px;
+    margin: 0 auto;
 }
 
 .logo {
-    margin-left: 110px;
-    margin-right: 285px;
+    margin-left: 112px;
+    margin-right: 288px;
 }
 
 .link {

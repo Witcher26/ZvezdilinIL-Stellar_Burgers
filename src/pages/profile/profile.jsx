@@ -18,7 +18,7 @@ export const ProfilePage = () => {
     const [formValues, setFormValues] = useState({
         name: user.name,
         email: user.email,
-        password: "",
+        password: user.password,
         
     });
 
@@ -32,6 +32,7 @@ export const ProfilePage = () => {
         e.preventDefault();
         dispatch(updateUserData(_updateUserUrl, formValues));
     };
+    
 
     const handleReset = () => {
         setFormValues({
@@ -73,30 +74,34 @@ export const ProfilePage = () => {
                         type="password"
                         icon={"EditIcon"}
                         placeholder="Пароль"
-                        value="******"
+                        name="password"
+                        value={formValues.password}
                         extraClass="mb-6"
                         onChange={changeInputValue}
                     />
                     <div className={styles.buttons}>
+                        {console.log("formValue :", formValues)}
                         {(formValues.name !== user.name ||
-                            formValues.email !== user.email) && (
-                            <>
-                                <Button
-                                    htmlType="button"
-                                    type="secondary"
-                                    size="medium"
-                                    onClick={handleReset}
-                                >
-                                    Отмена
-                                </Button>
-                                <Button
-                                    htmlType="submit"
-                                    type="primary"
-                                    size="medium"
-                                >
-                                    Сохранить
-                                </Button>
-                            </>
+                            formValues.password !== user.password ||
+                                formValues.email !== user.email) && (
+                                    
+                                    <>
+                                        <Button
+                                            htmlType="button"
+                                            type="secondary"
+                                            size="medium"
+                                            onClick={handleReset}
+                                        >
+                                            Отмена
+                                        </Button>
+                                        <Button
+                                            htmlType="submit"
+                                            type="primary"
+                                            size="medium"
+                                        >
+                                            Сохранить
+                                        </Button>
+                                    </>
                         )}
                     </div>
                 </form>

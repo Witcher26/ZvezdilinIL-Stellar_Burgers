@@ -23,11 +23,18 @@ const OrderingInfo = ({ finalPrice }) => {
     const dispatch = useDispatch();
 
     const makeOrder = () => {
+        if(!user) {
+            alert("Только авторизованные пользователи могут делать заказы!")
+            return;
+        }
+        if (resultIdArr.length < 1) {
+            alert("Соберите уже этот вкусный бургер!")
+            return;
+        }
         if (user) {
             dispatch(submitOrder(urlOrders, resultIdArr));
             dispatch({ type: OPEN_ORDER_MODAL });
-        } else {
-            alert("Только авторизованные пользователи могут делать заказы!")
+            return;
         }
     };
 
