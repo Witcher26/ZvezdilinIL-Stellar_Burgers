@@ -1,0 +1,13 @@
+.position {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 140px;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.page {
+    margin: 0 auto;
+    max-width: 1280px;
+}

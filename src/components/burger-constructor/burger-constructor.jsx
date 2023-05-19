@@ -8,17 +8,14 @@ import { useDrop } from "react-dnd";
 import PropTypes from "prop-types";
 
 const BurgerConstructor = ({ onDrop }) => {
-    const constructorIngredients = useSelector(
-        (store) => store.constructorIngredients
-    );
-
-    const bunData = useSelector((store) => store.bun);
+    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
+    const bunData = useSelector(store => store.ingredientsReducer.bun);
+    
     const bunsPrice = bunData ? bunData.price * 2 : 0;
-    const finalPrice =
-        constructorIngredients.reduce((accum, item) => accum + item.price, 0) +
-        bunsPrice;
+    const finalPrice = constructorIngredients.reduce((accum, item) => accum + item.price, 0) + bunsPrice;
 
     const { image, name, price } = bunData || {};
+
     const [{ isOverTop }, dropRefTop] = useDrop({
         accept: "bun",
         drop(item) {

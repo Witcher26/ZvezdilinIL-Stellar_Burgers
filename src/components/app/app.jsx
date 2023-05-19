@@ -1,94 +1,64 @@
 import React from 'react';
-import AppHeader from '../app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients/burger-ingredients';
-
-import BurgerConstructor from '../burger-constructor';
-import Modal from '../modal/modal';
-import IngredientDetails from '../burger-ingredients/ingredient-details';
-import OrderDetails from '../burger-ingredients/ingredient-details/order-details';
-
-import app from "./app.module.css";
-
-import { useDispatch, useSelector } from "react-redux";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-
-import { 
-        getIngredients,
-        SET_ACTIVE_INGREDIENT,
-        DRAG_CONSTRUCTOR_INGREDIENTS,
-        INCREASE_INGREDIENT,
-        DRAG_BUN_INGREDIENT,
-        CLOSE_MODAL
-} from '../../services/actions/actions';
-
-import { v4 as uuid } from "uuid";
+import { useDispatch } from "react-redux";
+import { getIngredients } from '../../services/actions/actions';
 import { baseUrl } from '../../env';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
-const ingredientsUrl = baseUrl+"ingredients";
+import ConstructorPage from '../../pages/constructor-page/constructor-page';
+import { UnAuthorized, Authorized } from '../protected-route';
+import { SignInPage } from '../../pages/registration/sign-in';
+import { RegisterPage } from '../../pages/registration/registration';
+import { ForgotPasswordPage } from '../../pages/registration/forgot-password';
+import { ResetPasswordPage } from '../../pages/registration/reset-password';
+import { ProfilePage } from '../../pages/profile';
+import { OrderPage } from '../../pages/orders';
+import IngredientDetails from '../burger-ingredients/ingredient-details';
+import { NotFoundPage } from '../../pages/not-found-page';
+import Modal from '../modal/modal';
+import { checkUserAuth } from '../../services/actions/formActions';
+
+const ingredientsUrl = `${baseUrl}/ingredients`;
 
 function App() {
-    const ingredientsModal = useSelector(store => store.ingredientsModal);
-    const orderModal = useSelector(store => store.orderModal);
-
     const dispatch = useDispatch();
-    const dispatchModal = useDispatch();
 
     React.useEffect(() => {
         dispatch(getIngredients(ingredientsUrl));
-    }, []);
+        dispatch(checkUserAuth());
+    }, [dispatch]);
 
-    const onDropHandler = item => {
-        dispatch({
-            type: SET_ACTIVE_INGREDIENT,
-            currentIngredient: item,
-        })
-
-        if (item.type !== "bun") {
-            dispatch({
-                type: DRAG_CONSTRUCTOR_INGREDIENTS,
-                item: { ...item, key: uuid() },
-            })
-            dispatch({
-                type: INCREASE_INGREDIENT,
-                id: item._id,
-            })
-        } else {
-            dispatch({
-                type: DRAG_BUN_INGREDIENT,
-                payload: { ...item, qty: ++item.qty },
-            })
-        }
-    };
-
-    const handleCloseModal = () => {
-        dispatchModal({ type: CLOSE_MODAL });
-        dispatchModal({ type: SET_ACTIVE_INGREDIENT, currentIngredient: {} });
-    };
+    const location = useLocation();
+    const background = location.state && location.state.background;
 
     return (
-        <div className={app.page}>
-            <AppHeader/>
-            <div className={app.position}>
-                <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients/>
-                    <BurgerConstructor onDrop={onDropHandler}/>
-                </DndProvider>
-            </div>
-
-            {ingredientsModal && 
-                <Modal 
-                    modalTitle="Детали ингредиента"
-                    handleCloseModal={handleCloseModal}
-                >
-                    <IngredientDetails/>
-                </Modal>}
-
-            {orderModal &&
-                <Modal handleCloseModal={handleCloseModal}>
-                    <OrderDetails/>
-                </Modal>} 
-        </div>
+        <React.Fragment>
+            <Routes location={background || location}>
+                <Route path="/" element={<ConstructorPage />} />
+                <Route path="/login" element={<UnAuthorized component={<SignInPage />} />}/>
+                <Route path="/register" element={<UnAuthorized component={<RegisterPage />} />}/>
+                <Route path="/forgot-password" element={<UnAuthorized component={<ForgotPasswordPage />} />}/>
+                <Route path="/reset-password" element={<UnAuthorized component={<ResetPasswordPage />} />} />
+                <Route path="/profile" element={<Authorized component={<ProfilePage />} />}/>
+                <Route path="/profile/orders" element={<Authorized component={<OrderPage />} />} />
+                <Route path="/ingredients/:ingredientId" element={<IngredientDetails />}/>
+                <Route path="*" element={<NotFoundPage />}/>
+            </Routes>
+            {background && (
+                <Routes>
+                    <Route
+                        path="/ingredients/:ingredientId"
+                        element={
+                            <Modal
+                                modalTitle="Детали ингредиента"
+                                className="pt-10 pl-10 pb-15 pr-10"
+                            >
+                                <IngredientDetails/>
+                            </Modal>
+                        }
+                    />
+                </Routes>
+            )}
+        </React.Fragment>
     );
 }
 

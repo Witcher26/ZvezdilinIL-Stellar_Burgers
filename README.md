@@ -40,4 +40,4 @@ Istall all node_modules
 - `feature`: Вёрстка BurgerIngredients - компонент
 - `feature`: Вёрстка AppHeader - компонента
 - `feature`: Установлена библиотека UI-компонентов
-- `feature`: Создана --template typescript CRA - заготовка со структурой папок под компоненты
+
