@@ -11,6 +11,9 @@ Istall all node_modules
 
 ### `npm start`
 
+![Бургерная](https://github.com/Witcher26/Stellar_Burgers/assets/66370784/25cd4d87-0d1e-456f-8b6d-b36eb59d8933)
+
+
 ## 4.0.0-master (19.05.2023 - release )
 - `bugfix`: кнопка "оформить заказ" теперь доступна только при собранном бургере
 - `bugfix`: добавлена возможность изменять пароль в профиле
