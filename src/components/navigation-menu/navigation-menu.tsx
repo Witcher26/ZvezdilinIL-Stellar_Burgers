@@ -1,17 +1,19 @@
 import styles from "./navigation-menu.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+
 import { useDispatch } from "react-redux";
 import { logOut } from "../../services/actions/formActions";
 import { baseUrl } from "../../env";
 
-const NavigationMenu = ({ desc }) => {
+const NavigationMenu = ({ desc }: {desc: string}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const _logOutUrl = `${baseUrl}/auth/logout`;
 
     const signOut = () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         dispatch(logOut(_logOutUrl));
         navigate("/login", { replace: true });
     };
@@ -65,10 +67,6 @@ const NavigationMenu = ({ desc }) => {
             </div>
         </div>
     );
-};
-
-NavigationMenu.propTypes = {
-    desc: PropTypes.string,
 };
 
 export default NavigationMenu;

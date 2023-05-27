@@ -2,10 +2,14 @@ import {
     ConstructorElement,
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import burgeConstructor from "./burger-constructor.module.css"
+import { TIngredient } from "../../utils/types/types";
 
-const BurgerConstructorOptions = ({data}) => {
+type TDataProps = {
+    data: Array<TIngredient>
+  };
+
+const BurgerConstructorOptions = ({data}: TDataProps) => {
     const items = data.map(({ _id, name, price, image}) => {
         return (
             <li className={burgeConstructor.elements_position_burger} key={_id}>
@@ -25,12 +29,5 @@ const BurgerConstructorOptions = ({data}) => {
         </ul>
     );
 }
-
-BurgerConstructorOptions.propTypes = {
-    /*
-        Массив с ингредиентами
-    */
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export {BurgerConstructorOptions};

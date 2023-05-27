@@ -2,9 +2,9 @@ import { checkResponse } from "../../utils/utils";
 export const POST_ORDER_INFO_SUCCESS = "POST_ORDER_INFO_SUCCESS";
 export const POST_ORDER_INFO_FAILED = "POST_ORDER_INFO_FAILED";
 
-export function submitOrder(_orderUrl, idArray) {
+export function submitOrder(orderUrl, idArray) {
     return function (dispatch) {
-        fetch(_orderUrl, {
+        fetch(orderUrl, {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -16,11 +16,16 @@ export function submitOrder(_orderUrl, idArray) {
             }),
         })
             .then(checkResponse)
-            .then((data) => {
-                dispatch({ type: POST_ORDER_INFO_SUCCESS, order: data.order });
+            .then(data => {
+                dispatch({
+                    type: POST_ORDER_INFO_SUCCESS,
+                    order: data.order
+                });
             })
             .catch(() => {
-                dispatch({ type: POST_ORDER_INFO_FAILED });
+                dispatch({
+                    type: POST_ORDER_INFO_FAILED
+                });
             });
     };
 }

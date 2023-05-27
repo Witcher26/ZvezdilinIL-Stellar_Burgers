@@ -5,56 +5,67 @@ import { useSelector } from "react-redux";
 
 import burgerConstructor from "./burger-constructor.module.css";
 import { useDrop } from "react-dnd";
-import PropTypes from "prop-types";
 
-const BurgerConstructor = ({ onDrop }) => {
-    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
-    const bunData = useSelector(store => store.ingredientsReducer.bun);
+import {
+    TConstructorIngredient,
+    TDropType,
+    TIngredient,
+  } from "../../utils/types/types";
+
+const BurgerConstructor = ({ onDrop }: TDropType): JSX.Element => {
+    const constructorIngredients = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.ingredientsReducer.constructorIngredients
+    );
+
+    const bunData = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.ingredientsReducer.bun
+    );
+
+    //нет store.modalReducer.orderModal
     
     const bunsPrice = bunData ? bunData.price * 2 : 0;
-    const finalPrice = constructorIngredients.reduce((accum, item) => accum + item.price, 0) + bunsPrice;
 
-    const { image, name, price } = bunData || {};
+    const finalPrice = constructorIngredients.reduce(
+        (accum: number, item: TConstructorIngredient) => accum + item.price, 0
+    ) + bunsPrice;
 
-    const [{ isOverTop }, dropRefTop] = useDrop({
+    const {
+        image,
+        name,
+        price
+    } = bunData || {};
+
+    const [{ isHover }, dropRef] = useDrop({
         accept: "bun",
-        drop(item) {
+        drop(item: TIngredient) {
             onDrop(item);
         },
         collect: (monitor) => ({
-            isOverTop: monitor.isOver(),
+            isHover: monitor.isOver(),
         }),
     });
 
-    const [{ isOverBottom }, dropRefBottom] = useDrop({
-        accept: "bun",
-        drop(itemId) {
-            onDrop(itemId);
-        },
-        collect: (monitor) => ({
-            isOverBottom: monitor.isOver(),
-        }),
-    });
+    type TValue = "top" | "bottom";
+    type TBunType = TIngredient | null;
 
-    const renderBun = (bunData, direction) => {
-        const addValueFromDir = (direction, fstValue, scndValue) => {
+    const renderBun = (bunData: TBunType, direction: string) => {
+        const addValueFromDir = (
+            direction: string,
+            fstValue?: TValue,
+            scndValue?: TValue,
+        ) => {
             return direction === "верх" ? fstValue : scndValue;
         };
 
-        const overDirection = addValueFromDir(
-            direction,
-            isOverTop,
-            isOverBottom
-        );
-
-        const ref = addValueFromDir(direction, dropRefTop, dropRefBottom);
         const type = addValueFromDir(direction, "top", "bottom");
         if (bunData) {
             return (
-                <div
-                    ref={ref}
-                    className={`${
-                        overDirection
+                <div className={
+                    `${ isHover
                             ? `${burgerConstructor.hovered_block} ${burgerConstructor.bun_container}`
                             : ""
                     } `}
@@ -72,30 +83,23 @@ const BurgerConstructor = ({ onDrop }) => {
         }
 
         return (
-            <div
-                ref={ref}
-                className={`${
-                    burgerConstructor.empty
-                } constructor-element mr-2  ${
-                    overDirection ? `${burgerConstructor.hovered_block}` : ""
-                } `}
+            <div className={ `${ burgerConstructor.empty } constructor-element mr-2  ${ isHover
+                ? `${burgerConstructor.hovered_block}`
+                : "" } `}
             >
                 Положите булку сюда
             </div>
         );
     };
+    
     return (
-        <div className="ml-20 mt-25">
+        <div ref={dropRef} className="ml-20 mt-25">
             {renderBun(bunData, "верх")}
             <BurgerConstructorList onDrop={onDrop} />
             {renderBun(bunData, "низ")}
             <OrderingInfo finalPrice={finalPrice} />
         </div>
     );
-};
-
-BurgerConstructor.propTypes = {
-    onDrop: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

@@ -1,4 +1,4 @@
-import { checkResponse } from "../utils";
+import { checkResponse } from "../../utils/utils";
 import { fetchWithRefresh } from "../auth";
 import { baseUrl } from "../../env";
 export const RESET_FORM_FAILED = "RESET_FORM_FAILED";
@@ -144,7 +144,7 @@ export const getUser = () => {
                 Authorization: localStorage.getItem("accessToken"),
             },
         })
-            .then((data) => {
+            .then(data => {
                 dispatch({
                     type: SET_USER_SUCCESS,
                     payload: data.user,
@@ -169,7 +169,7 @@ export const checkUserAuth = () => {
                     dispatch({ type: AUTH_CHECK, payload: true });
                 });
         } else {
-            dispatch({ type: AUTH_CHECK, payload: true });
+            dispatch({ type: AUTH_CHECK, payload: true })
         }
     };
 };
