@@ -1,4 +1,4 @@
-import { checkResponse } from "./utils";
+import { checkResponse } from "../utils/utils";
 import { baseUrl } from "../env";
 
 export const refreshToken = () => {

@@ -1,16 +1,24 @@
-import PropTypes from "prop-types";
+import { TIngredient } from "../../utils/types/types";
 import ingredientDetailsStyle from "./burger-ingredients.module.css"
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 function IngredientDetails() {
     const { ingredientId } = useParams();
-    const ingredientsData = useSelector(store => store.ingredientsReducer.ingredientsData);
-    const currentOpened = useSelector(store => store.ingredientsReducer.currentIngredient);
+    const ingredientsData = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.ingredientsReducer.ingredientsData
+    );
+    const currentOpened = useSelector(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore        
+        store => store.ingredientsReducer.currentIngredient
+    );
 
-    const currentIngredient = ingredientId ? ingredientsData.find(item => item._id === ingredientId) : currentOpened;
+    const currentIngredient = ingredientId ? ingredientsData.find((item: TIngredient) => item._id === ingredientId) : currentOpened;
 
-    const generateMarkup = element => {
+    const generateMarkup = (element: TIngredient) => {
         const {
             image_large,
             name,
@@ -69,12 +77,5 @@ function IngredientDetails() {
 
     return modalBody;
 }
-
-IngredientDetails.propTypes = {
-    /*
-        Набор свойств ингредиента
-    */
-        currentIngredient: PropTypes.object,
-};
 
 export default IngredientDetails;

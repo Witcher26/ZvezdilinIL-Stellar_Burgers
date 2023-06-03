@@ -13,8 +13,18 @@
 }
 
 .close_btn {
-    background-color: transparent;
-    border-style: none;
+    position: absolute;
+    right: 40px;
+    top: 50px;
+    border: 0;
+    background-color: unset;
     cursor: pointer;
-    margin-left: auto;
+    transition: opacity 0.25s ease-in-out;
+    padding: 0;
+}
+
+.close_pos {
+    top: 30px;
+    position: relative;
+    right: 30px;
 }

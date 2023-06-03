@@ -4,15 +4,18 @@ import {
     Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration.module.css";
-import AppHeader from "../../components/app-header/app-header";
+
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { passwordUpdate } from "../../services/actions/formActions";
 import { baseUrl } from "../../env";
+import { TFormValues } from "../../utils/types/types";
+
+type TResetForm = Pick<TFormValues, "password"> & {token: string}
 
 export const ResetPasswordPage = () => {
-    const [formValues, setFormValues] = useState({ password: "", token: "" });
-    const changeInputValue = (e) => {
+    const [formValues, setFormValues] = useState<TResetForm>({ password: "", token: "" });
+    const changeInputValue: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
@@ -32,8 +35,10 @@ export const ResetPasswordPage = () => {
 
     const dispatch = useDispatch();
 
-    const submitForm = (e) => {
+    const submitForm = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         dispatch(passwordUpdate(_resetPwdUrl, formValues));
         navigate("/", {
             replace: true,
@@ -42,7 +47,6 @@ export const ResetPasswordPage = () => {
 
     return (
         <>
-            <AppHeader />
             <div className={styles.form_container}>
                 <h1 className="text text_type_main-medium">
                     Восстановление пароля

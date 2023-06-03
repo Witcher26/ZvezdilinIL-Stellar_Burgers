@@ -1,8 +1,11 @@
-import React from "react";
 import modalOverlayStyles from "./modal-overlay.module.css";
-import PropTypes from "prop-types";
 
-const ModalOverlay = ({ handleCloseModal, children }) => {
+type TModalOverlay = {
+    handleCloseModal: (e: React.SyntheticEvent) => void;
+    children: JSX.Element;
+};
+
+const ModalOverlay = ({ handleCloseModal, children }: TModalOverlay) => {
     return (
         <div
             className={modalOverlayStyles.overlay}
@@ -12,11 +15,6 @@ const ModalOverlay = ({ handleCloseModal, children }) => {
             {children}
         </div>
     );
-};
-
-ModalOverlay.propTypes = {
-    handleCloseModal: PropTypes.func.isRequired,
-    children: PropTypes.node,
 };
 
 export default ModalOverlay;

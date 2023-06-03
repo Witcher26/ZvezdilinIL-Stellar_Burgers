@@ -4,15 +4,31 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory type a command in the terminal:
 
 ### `yarn istall`
 Istall all node_modules
 
-### `npm start`
+In file package.json run script
+### `start`
+or type a command in the terminal: `npm start`
 
 ![Бургерная](https://github.com/Witcher26/Stellar_Burgers/assets/66370784/25cd4d87-0d1e-456f-8b6d-b36eb59d8933)
 
+## 5.0.0-master (03.06.2023 - release )
+- `fix`: В директорию utils добавлен метод, создающий новый объект, в котором ключи без значений заменяются ключами со значением пустой строки
+- `fix`: В директорию utils добавлен метод проверки на объект
+- `fix`: убрана 403 ошибка неавторизованного пользователя
+- `bugfix`: Убрана логика экшенов для конкретных попапов внутри компонента Modal
+- `fix`: Неавторизованный пользователь при клике на кнопку "Оформить заказ" переводится на страницу логина и, после удачного логина, обратно к заказу.
+- `bugfix`: Крестик в попапе заказа помещён по макету.
+- `fix`: Убраны ошибки в консоли при входе в личный кабинет
+- `bugfix`: Убраны дубликаты <AppHeader /> в роутинге страниц
+- `fix`: Починена логика автопереключения табов при скроллинге ингредиентов
+- `bugfix`: Заменён тип данных для ответа от сервера в методе checkResponse директории utils на `Response`
+- `feature`: С проекта убраны PropTypes
+- `feature`: Утилитарные методы переведны на TypeScript
+- `feature`: Компоненты переведны на TypeScript
 
 ## 4.0.0-master (19.05.2023 - release )
 - `bugfix`: кнопка "оформить заказ" теперь доступна только при собранном бургере

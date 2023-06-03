@@ -1,4 +1,3 @@
-import { AppHeader } from '../../components';
 import BurgerIngredients from '../../components/burger-ingredients';
 import {BurgerConstructor} from '../../components';
 import Modal from '../../components/modal/modal';
@@ -15,19 +14,23 @@ import {
     CLOSE_MODAL
 } from '../../services/actions/actions';
 import { v4 as uuid } from "uuid";
+import { TIngredient } from '../../utils/types/types';
 
 const ConstructorPage = () => {
     const dispatch = useDispatch();
     const dispatchModal = useDispatch();
 
-    const orderModal = useSelector(store => store.modalReducer.orderModal);
+    const orderModal = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.modalReducer.orderModal);
     
     const handleCloseModal = () => {
         dispatchModal({ type: CLOSE_MODAL });
         dispatchModal({ type: SET_ACTIVE_INGREDIENT, currentIngredient: {} });
     };
 
-    const onDropHandler = item => {
+    const onDropHandler = (item: TIngredient) => {
         dispatch({
             type: SET_ACTIVE_INGREDIENT,
             currentIngredient: item,
@@ -52,15 +55,15 @@ const ConstructorPage = () => {
 
     return(
         <div className={app.page}>
-            <AppHeader/>
             <div className={app.position}>
                 <DndProvider backend={HTML5Backend}>
                     <BurgerIngredients/>
                     <BurgerConstructor onDrop={onDropHandler}/>
                 </DndProvider>
             </div>
-
             {orderModal &&
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 <Modal handleCloseModal={handleCloseModal}>
                     <OrderDetails/>
                  </Modal>} 

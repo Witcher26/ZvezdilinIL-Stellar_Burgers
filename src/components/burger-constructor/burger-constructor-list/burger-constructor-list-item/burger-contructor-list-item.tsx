@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import burgerConstructorListItem from "./burger-constructor-list-item.module.css";
 import {
@@ -6,14 +6,25 @@ import {
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { REMOVE_INGREDIENT } from "../../../../services/actions/actions";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { TConstructorIngredient } from "../../../../utils/types/types";
 
-const BurgerConstructorListItem = ({ item, index, moveIngredient }) => {
+type TConstructorItemProps = {
+    item: TConstructorIngredient;
+    index: number;
+    moveIngredient: (dragIndex: number, hoverIndex: number) => void;
+  };
+  
+  type TDragIngredientType = {
+    _id: string;
+    index: number;
+  };
+
+const BurgerConstructorListItem = ({ item, index, moveIngredient }: TConstructorItemProps) => {
     const { name, price, image, _id } = item;
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
 
-    const [{ isDragging }, dragRef] = useDrag({
+    const [{ isDragging }, dragRef] = useDrag<TDragIngredientType, unknown, { isDragging: boolean }>({
         type: "ingredient",
         item: () => {
             return { _id, index };
@@ -23,7 +34,7 @@ const BurgerConstructorListItem = ({ item, index, moveIngredient }) => {
         }),
     });
 
-    const [, dropRef] = useDrop({
+    const [, dropRef] = useDrop<TDragIngredientType>({
         accept: "ingredient",
         hover: (item, monitor) => {
             if (!ref.current) {
@@ -42,6 +53,9 @@ const BurgerConstructorListItem = ({ item, index, moveIngredient }) => {
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
             const clientOffset = monitor.getClientOffset();
+            if (!clientOffset) {
+                return;
+            }
             const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -56,11 +70,14 @@ const BurgerConstructorListItem = ({ item, index, moveIngredient }) => {
         },
     });
 
-    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
+    const constructorIngredients = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.ingredientsReducer.constructorIngredients);
 
     const dispatch = useDispatch();
 
-    const removeElement = (item, index) => {
+    const removeElement = (item: TConstructorIngredient, index: number) => {
         dispatch({
             type: REMOVE_INGREDIENT,
             payload: [
@@ -89,12 +106,6 @@ const BurgerConstructorListItem = ({ item, index, moveIngredient }) => {
             />
         </div>
     );
-};
-
-BurgerConstructorListItem.propTypes = {
-    item: PropTypes.object,
-    index: PropTypes.number,
-    moveIngredient: PropTypes.func,
 };
 
 export default BurgerConstructorListItem;

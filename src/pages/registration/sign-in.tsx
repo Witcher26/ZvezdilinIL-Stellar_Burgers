@@ -1,22 +1,25 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import {
     Input,
     Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration.module.css";
-import AppHeader from "../../components/app-header/app-header";
+
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../services/actions/formActions";
 import { baseUrl } from "../../env";
+import { TFormValues } from "../../utils/types/types";
+
+type TSingInForm = Omit<TFormValues, "name">;
 
 export const SignInPage = () => {
-    const [formValues, setFormValues] = useState({
+    const [formValues, setFormValues] = useState<TSingInForm>({
         email: "",
         password: "",
     });
 
-    const changeInputValue = e => {
+    const changeInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
@@ -24,15 +27,16 @@ export const SignInPage = () => {
 
     const dispatch = useDispatch();
 
-    const submitForm = e => {
+    const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         dispatch(loginUser(_loginUrl, formValues));
     };
 
     const { email, password } = formValues;
     return (
         <>
-            <AppHeader />
             <div className={styles.form_container}>
                 <h1 className="text text_type_main-medium">Вход</h1>
                 <form action="" className={styles.form} onSubmit={submitForm}>

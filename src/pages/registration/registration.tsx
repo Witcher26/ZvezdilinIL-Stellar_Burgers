@@ -4,14 +4,15 @@ import {
     Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration.module.css";
-import AppHeader from "../../components/app-header/app-header";
+
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/actions/formActions";
 import { useDispatch } from "react-redux";
 import { baseUrl } from "../../env";
+import { TFormValues } from "../../utils/types/types";
 
 export const RegisterPage = () => {
-    const [formValues, setFormValues] = useState({
+    const [formValues, setFormValues] = useState<TFormValues>({
         name: "",
         password: "",
         email: "",
@@ -19,7 +20,7 @@ export const RegisterPage = () => {
 
     const navigate = useNavigate();
 
-    const changeInputValue = e => {
+    const changeInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
@@ -27,8 +28,10 @@ export const RegisterPage = () => {
 
     const dispatch = useDispatch();
 
-    const submitForm = e => {
+    const submitForm = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         dispatch(registerUser(_registerUrl, formValues));
         navigate("/", {
             replace: true,
@@ -37,7 +40,6 @@ export const RegisterPage = () => {
 
     return (
         <>
-            <AppHeader />
             <div className={styles.form_container}>
                 <h1 className="text text_type_main-medium">Регистрация</h1>
                 <form onSubmit={submitForm} action="" className={styles.form}>

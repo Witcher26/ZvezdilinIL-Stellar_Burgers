@@ -1,14 +1,14 @@
 import burgerConstructorList from "./burger-constructor-list.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
-import PropTypes from "prop-types";
 import BurgerConstructorListItem from "./burger-constructor-list-item/burger-contructor-list-item";
 import { SORT_INGREDIENTS_ON_DRAG } from "../../../services/actions/actions";
+import { TConstructorIngredient, TDropType } from "../../../utils/types/types";
 
-const BurgerConstructorList = ({ onDrop }) => {
+const BurgerConstructorList = ({ onDrop }: TDropType) => {
     const [{ isOver }, dropRef] = useDrop({
         accept: ["main", "sauce"],
-        drop(itemId) {
+        drop(itemId: TConstructorIngredient) {
             onDrop(itemId);
         },
         collect: (monitor) => ({
@@ -16,11 +16,14 @@ const BurgerConstructorList = ({ onDrop }) => {
         }),
     });
 
-    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
+    const constructorIngredients = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.ingredientsReducer.constructorIngredients);
 
     const dispatch = useDispatch();
 
-    const moveIngredient = (dragIdx, hoverIdx) => {
+    const moveIngredient = (dragIdx: number, hoverIdx: number) => {
         const dragIngredient = constructorIngredients[dragIdx];
         const newArr = [...constructorIngredients];
         newArr.splice(dragIdx, 1);
@@ -40,7 +43,7 @@ const BurgerConstructorList = ({ onDrop }) => {
                         isOver ? burgerConstructorList.hovered_block : ""
                     }`}
                 >
-                    {constructorIngredients.map((item, index) => {
+                    {constructorIngredients.map((item: TConstructorIngredient, index: number) => {
                         return (
                             <li key={item.key}>
                                 <BurgerConstructorListItem
@@ -72,10 +75,6 @@ const BurgerConstructorList = ({ onDrop }) => {
     );
 
     return elements;
-};
-
-BurgerConstructorList.propTypes = {
-    onDrop: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructorList;

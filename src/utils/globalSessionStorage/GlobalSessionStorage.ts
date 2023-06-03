@@ -1,9 +1,9 @@
 export class GlobalSessionStorage {
-    setValue(key, value) {
+    setValue(key: string, value: string) {
         !!value && sessionStorage.setItem(key, JSON.stringify(value));
     }
 
-    getValue(key, defaultValue) {
+    getValue(key: string, defaultValue: string) {
         const value = sessionStorage.getItem(key);
         return !!value ? JSON.parse(value) : defaultValue;
     }

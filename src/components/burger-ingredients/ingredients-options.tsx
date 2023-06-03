@@ -6,13 +6,23 @@ import {
     OPEN_INGREDIENTS_MODAL
 } from "../../services/actions/actions";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
+import { TIngredient } from "../../utils/types/types";
 
-const IngredientsOptions= forwardRef(function BurgerIngredientsList({ingredientsType}, ref) {
-    const ingredientsData = useSelector(store => store.ingredientsReducer.ingredientsData);
+type TRef = HTMLDivElement | null;
+type TIngredientsType = {
+  ingredientsType: string;
+};
+
+const IngredientsOptions= forwardRef<TRef, TIngredientsType>(function BurgerIngredientsList({ingredientsType}, ref) {
+    const ingredientsData = useSelector(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        store => store.ingredientsReducer.ingredientsData
+    );
+    
     const dispatch = useDispatch();
 
-    const addTitle = string => {
+    const addTitle = (string: string) => {
         let title = "";
         switch (string) {
             case "bun":
@@ -27,6 +37,7 @@ const IngredientsOptions= forwardRef(function BurgerIngredientsList({ingredients
             default:
                 title = "";
         }
+        
         return (
             <h3 ref={ref} className="text text_type_main-medium mb-6">
                 {title}
@@ -34,31 +45,32 @@ const IngredientsOptions= forwardRef(function BurgerIngredientsList({ingredients
         );
     };
 
-    const handleClick = item => {
-        dispatch({ type: SET_ACTIVE_INGREDIENT, currentIngredient: item });
-        dispatch({ type: OPEN_INGREDIENTS_MODAL });
+    const handleClick = (item: TIngredient) => {
+      dispatch({ type: SET_ACTIVE_INGREDIENT, currentIngredient: item });
+      dispatch({ type: OPEN_INGREDIENTS_MODAL });
     };
 
-    const newData = ingredientsData.map(item => {
+    const newData = ingredientsData.map((item: TIngredient) => {
         return { ...item, qty: 0 };
     });
 
-    const buildLayout = (string, ref) => {
+    const buildLayout = (string: string) => {
         return (
             <>
                 {ingredientsData && string ? (
                     <>
-                        {addTitle(string, ref)}
+                        {addTitle(string)}
                         <ul className={`${burgerIngredientsList.list} ml-0 pl-1 pr-1`} >
                             {newData
-                                .filter(item => {
+                                .filter((item: TIngredient) => {
                                     return item.type === ingredientsType;
                                 })
-                                .map(item => {
+                                .map((item: TIngredient): JSX.Element | null => {
                                     return (
                                         <li key={item._id}
                                             onClick={() => handleClick(item)}
-                                            aria-hidden="true">
+                                            aria-hidden="true"
+                                        >
                                             <IngredientItem ingredient={item}/>
                                         </li>
                                     );
@@ -70,14 +82,7 @@ const IngredientsOptions= forwardRef(function BurgerIngredientsList({ingredients
         );
     };
 
-    return <div>{buildLayout(ingredientsType, ref)}</div>;
+    return <div>{buildLayout(ingredientsType)}</div>;
 });
-
-IngredientsOptions.propTypes = {
-    /*
-        тип игредиента
-    */
-    ingredientsType: PropTypes.string,
-};
 
 export default IngredientsOptions;

@@ -1,33 +1,46 @@
 import React from "react";
 import burgerIngredients from "./burger-ingredients.module.css"
-import IngredientsOptions from "../ingredients-options.jsx";
+import IngredientsOptions from "../ingredients-options";
 
 import { useDispatch } from "react-redux";
 import { SET_CURRENT_TAB } from "../../../services/actions/actions.js";
-import TabList from "../tab-list/tab-list.jsx";
+import TabList from "../tab-list/tab-list";
+
+type TIngredientOpts = {
+    type: string;
+    ref: React.RefObject<HTMLDivElement | null>;
+};
 
 const BurgerIngredients = () => {
-    const listRef = React.useRef(null);
+    const listRef = React.useRef<HTMLDivElement | null>(null);
     const dispatch = useDispatch();
 
-    const tabRef = React.useRef(null);
-    const bunOptions = { type: "bun", ref: React.useRef(null) };
-    const sauceOptions = { type: "sauce", ref: React.useRef(null) };
-    const mainOptions = { type: "main", ref: React.useRef(null) };
+    const tabRef = React.useRef<HTMLDivElement | null>(null);
+    const bunOptions = { type: "bun", ref: React.useRef<HTMLDivElement | null>(null) };
+    const sauceOptions = { type: "sauce", ref: React.useRef<HTMLDivElement | null>(null) };
+    const mainOptions = { type: "main", ref: React.useRef<HTMLDivElement | null>(null) };
 
-    const setCurrentElement = (tabPos, element) => {
+    const setCurrentElement = (tabPos: number, element: TIngredientOpts) => {
         const {
             ref: { current },
             type,
         } = element;
+
+        if (!current) {
+            return;
+        }
 
         if (tabPos - current.getBoundingClientRect().top >= 0) {
             dispatch({ type: SET_CURRENT_TAB, payload: type });
         }
     };
 
-    const findScrollableEl = (obj, type) => {
+    const findScrollableEl = (obj: TIngredientOpts, type: string) => {
         if (obj.type === type) {
+            if (!obj.ref.current) {
+                return;
+            }
+
             obj.ref.current.scrollIntoView({
                 behavior: "smooth",
                 block: "start",
@@ -35,7 +48,7 @@ const BurgerIngredients = () => {
         }
     };
 
-    const scrollByTabClick = (type) => {
+    const scrollByTabClick = (type: string) => {
         findScrollableEl(bunOptions, type);
         findScrollableEl(sauceOptions, type);
         findScrollableEl(mainOptions, type);
@@ -43,12 +56,18 @@ const BurgerIngredients = () => {
 
     React.useEffect(() => {
         const handleScroll = () => {
+            if (!tabRef.current) {
+                return;
+            }
             const tabsBottomPos = tabRef.current.getBoundingClientRect().bottom;
             setCurrentElement(tabsBottomPos, bunOptions);
             setCurrentElement(tabsBottomPos, sauceOptions);
             setCurrentElement(tabsBottomPos, mainOptions);
         };
         const listNode = listRef.current;
+        if (!listNode) {
+            return;
+        }
         listNode.addEventListener("scroll", handleScroll);
 
         return () => {
@@ -56,7 +75,7 @@ const BurgerIngredients = () => {
         };
     }, []);
 
-    const buildListLayout = (obj) => {
+    const buildListLayout = (obj: TIngredientOpts): JSX.Element => {
         const { type, ref } = obj;
         return <IngredientsOptions ingredientsType={type} ref={ref} />;
     };
