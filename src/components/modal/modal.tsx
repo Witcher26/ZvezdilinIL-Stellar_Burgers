@@ -8,11 +8,11 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 const modalRoot = document.getElementById("root-modal") as HTMLElement;
 
 type TModalProps = {
-    className: string;
+    handleCloseModal: () => void;
     children: JSX.Element;
     modalTitle?: string;
-    handleCloseModal: () => void;
-  };
+    className?: string;
+};
 
 const Modal = ({ modalTitle, className, children, handleCloseModal}: TModalProps): JSX.Element | null => {
 
@@ -44,15 +44,12 @@ const Modal = ({ modalTitle, className, children, handleCloseModal}: TModalProps
                     {modalTitle && <h2 className="text text_type_main-large">
                         {modalTitle}
                     </h2>}
-                    {/* <div className={modalStyles.close_pos}> */}
                         <button
                             className={modalStyles.close_btn}
                             onClick={handleCloseModal}
                         >
                             <CloseIcon type="primary"/>
                         </button>
-
-                    {/* </div> */}
                     </>
                 </ModalHeader>
                 {children}

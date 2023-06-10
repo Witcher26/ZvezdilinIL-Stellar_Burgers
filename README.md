@@ -15,6 +15,26 @@ or type a command in the terminal: `npm start`
 
 ![Бургерная](https://github.com/Witcher26/Stellar_Burgers/assets/66370784/25cd4d87-0d1e-456f-8b6d-b36eb59d8933)
 
+## 6.0.0-master (19.06.2023 - release )
+- `bugfix`: убрана ошибка белого экрана для GlobalSessionStorage
+- `feature`: добавлен компонент OrderReport (лента заказов)
+- `feature`: добавлен компонент BurgerCardExpanded
+- `feature`: добавлен компонент Loader
+- `feature`: добавлен компонент NavigationMenu
+- `feature`: добавлены feedActions.js
+- `feature`: добавлен feedReducer
+- `feature`: добавлен feedOrderReducer
+- `feature`: добавлен socketMiddleware
+- `fix`: методы запросов вынесены в файл api.ts
+- `feature`: типизированы хуки useDispatch и useSelector
+- `feature`: типизировано хранилище
+- `feature`: типизированы экшены
+- `feature`: типизированы редьюсеры
+- `feature`: Добавлен роутер /profile/orders/:id
+- `feature`: Добавлен роутер /profile/orders/
+- `feature`: Добавлен роутер /feed/:id
+- `feature`: Добавлен роутер /feed
+
 ## 5.0.0-master (03.06.2023 - release )
 - `fix`: В директорию utils добавлен метод, создающий новый объект, в котором ключи без значений заменяются ключами со значением пустой строки
 - `fix`: В директорию utils добавлен метод проверки на объект
@@ -49,6 +69,7 @@ or type a command in the terminal: `npm start`
 - `feature`: создана главная страница приложения / - constructorPage
 - `feature`: добавлена директория pages, установлены компоненты BrowserRouter, Router и Routes
 - `feature`: добавлена библиотека react-router-dom
+
 ## 3.0.0-master (29.04.2023 - release)
 - `bugfix`: общая логика проверки ответа во всех запросах вынесена в отдельную функцию checkResponse директории utils
 - `bugfix`: убраны экшены для конкретных попапов из Modal

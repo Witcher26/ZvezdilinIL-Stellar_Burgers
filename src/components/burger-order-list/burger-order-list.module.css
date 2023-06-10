@@ -1,0 +1,15 @@
+.order_list {
+    list-style: none;
+    height: 80vh;
+    overflow-y: auto;
+    padding: 0;
+    margin-left: 0;
+    padding-left: 0;
+    width: 100%;
+    max-width: 844px;
+  }
+  
+  .order_list a {
+    text-decoration: none;
+    color: #fff;
+  }

@@ -1,24 +1,34 @@
 import {CheckMarkIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import orderDetails from "./order-details.module.css"
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks/hooks";
+import { Loader } from "../../loader/loader";
 
 function OrderDetails() {
-    const order = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.orderReducer.order);
+    const order = useSelector(store => store.orderReducer.order);
+
     return (
         <div className={orderDetails.display_flex}>
-            <p className="text text_type_digits-large pb-8">
-                {order.number}
-            </p>
-            <p className="text text_type_main-medium pb-15">
-                идентификатор заказа
-            </p>
+            {order ? (
+                <>
+                    <span className={orderDetails.checkMarkIcon_position}>
+                        <CheckMarkIcon type="primary"/>
+                    </span>
+                    <p className="text text_type_digits-large pb-8">
+                        {order.number}
+                    </p>
+                    <p className="text text_type_main-medium pb-15">
+                        идентификатор заказа
+                    </p>
+                </>)
+                : (
+                    <>
+                    <Loader size={70} />
+                        <p className="text text_type_main-small pb-15">
+                            Дождитесь окончания формирования заказа....
+                        </p>
+                </>)
+            }     
             <div className={orderDetails.text_position}>
-                <span className={orderDetails.checkMarkIcon_position}>
-                    <CheckMarkIcon type="primary"/>
-                </span>
             </div>
             <p className="text text_type_main-default pb-2">
                 Ваш заказ начали готовить

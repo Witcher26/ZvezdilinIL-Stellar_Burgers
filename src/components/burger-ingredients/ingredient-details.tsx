@@ -1,20 +1,12 @@
 import { TIngredient } from "../../utils/types/types";
 import ingredientDetailsStyle from "./burger-ingredients.module.css"
-import { useSelector } from "react-redux";
+import { useSelector } from "../hooks/hooks";
 import { useParams } from "react-router-dom";
 
-function IngredientDetails() {
+function IngredientDetails(): JSX.Element | null {
     const { ingredientId } = useParams();
-    const ingredientsData = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.ingredientsReducer.ingredientsData
-    );
-    const currentOpened = useSelector(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore        
-        store => store.ingredientsReducer.currentIngredient
-    );
+    const ingredientsData = useSelector(store => store.ingredientsReducer.ingredientsData);
+    const currentOpened = useSelector(store => store.ingredientsReducer.currentIngredient);
 
     const currentIngredient = ingredientId ? ingredientsData.find((item: TIngredient) => item._id === ingredientId) : currentOpened;
 
@@ -75,7 +67,7 @@ function IngredientDetails() {
     };
     const modalBody = currentIngredient && generateMarkup(currentIngredient);
 
-    return modalBody;
+    return modalBody || null;
 }
 
 export default IngredientDetails;

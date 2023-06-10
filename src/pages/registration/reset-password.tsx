@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Input,
     Button,
@@ -6,7 +6,7 @@ import {
 import styles from "./registration.module.css";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../components/hooks/hooks";
 import { passwordUpdate } from "../../services/actions/formActions";
 import { baseUrl } from "../../env";
 import { TFormValues } from "../../utils/types/types";
@@ -15,7 +15,7 @@ type TResetForm = Pick<TFormValues, "password"> & {token: string}
 
 export const ResetPasswordPage = () => {
     const [formValues, setFormValues] = useState<TResetForm>({ password: "", token: "" });
-    const changeInputValue: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const changeInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
@@ -37,8 +37,6 @@ export const ResetPasswordPage = () => {
 
     const submitForm = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         dispatch(passwordUpdate(_resetPwdUrl, formValues));
         navigate("/", {
             replace: true,
@@ -59,7 +57,7 @@ export const ResetPasswordPage = () => {
                         placeholder="Введите новый пароль"
                         extraClass="mt-6"
                         onChange={changeInputValue}
-                        value={formValues.password}
+                        value={formValues.password || ""}//TODO
                     />
                     <Input
                         name="token"

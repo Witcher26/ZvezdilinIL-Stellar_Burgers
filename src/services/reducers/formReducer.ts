@@ -1,3 +1,5 @@
+import { TFormValues } from "../../utils/types/types";
+import { TAppActions } from "../actions";
 import {
     RESET_FORM_FAILED,
     RESET_FORM_SUCCESS,
@@ -11,10 +13,27 @@ import {
     SET_USER_SUCCESS,
     AUTH_CHECK,
     LOGOUT_FORM_SUCCESS,
-    LOGOUT_FORM_FAILED,
-} from "../actions/formActions";
+    LOGOUT_FORM_FAILED
+} from "../constants";
 
-const initialState = {
+type TFormState = {
+    resetFormFailed: boolean;
+    resetFormSuccess: boolean;
+    updateFormFailed: boolean;
+    updateFormSuccess: boolean;
+    registerFormSuccess: boolean;
+    registerFormFailed: boolean;
+    loginFormSuccess: boolean;
+    loginFormFailed: boolean;
+    userInfo: null |TFormValues;
+    userInfoFailed: boolean;
+    userInfoSuccess: boolean;
+    isAuthChecked: boolean;
+    logoutFormSuccess: boolean;
+    logoutFormFailed: boolean;
+  };
+
+const initialState: TFormState = {
     resetFormFailed: false,
     resetFormSuccess: false,
     updateFormFailed: false,
@@ -28,23 +47,23 @@ const initialState = {
     userInfoSuccess: false,
     isAuthChecked: false,
     logoutFormSuccess: false,
-    logoutFormFailed: false,
+    logoutFormFailed: false
 };
 
-export const formReducer = (state = initialState, action) => {
+export const formReducer = (state = initialState, action: TAppActions):TFormState => {
     switch (action.type) {
         case RESET_FORM_SUCCESS: {
             return {
                 ...state,
                 resetFormSuccess: true,
-                resetFormFailed: false,
+                resetFormFailed: false
             };
         }
         case RESET_FORM_FAILED:
             return {
                 ...state,
                 resetFormFailed: true,
-                resetFormSuccess: false,
+                resetFormSuccess: false
             };
         case UPDATE_FORM_SUCCESS: {
             return {
@@ -57,53 +76,53 @@ export const formReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updateFormFailed: true,
-                updateFormSuccess: false,
+                updateFormSuccess: false
             };
         case REGISTER_FORM_SUCCESS:
             return {
                 ...state,
                 userInfo: action.payload,
                 registerFormSuccess: true,
-                registerFormFailed: false,
+                registerFormFailed: false
             };
         case REGISTER_FORM_FAILED:
             return {
                 ...state,
                 registerFormFailed: true,
-                registerFormSuccess: false,
+                registerFormSuccess: false
             };
         case LOGIN_FORM_SUCCESS:
             return {
                 ...state,
                 userInfo: action.payload,
                 loginFormSuccess: true,
-                loginFormFailed: false,
+                loginFormFailed: false
             };
         case LOGIN_FORM_FAILED:
             return {
                 ...state,
                 loginFormFailed: true,
-                loginFormSuccess: false,
+                loginFormSuccess: false
             };
         case SET_USER_FAILED: {
             return {
                 ...state,
                 userInfoFailed: true,
-                userInfoSucces: false,
+                userInfoSuccess: false
             };
         }
         case SET_USER_SUCCESS: {
             return {
                 ...state,
-                userInfoSucces: true,
+                userInfoSuccess: true,
                 userInfoFailed: false,
-                userInfo: action.payload,
+                userInfo: action.payload
             };
         }
         case AUTH_CHECK: {
             return {
                 ...state,
-                isAuthChecked: action.payload,
+                isAuthChecked: action.payload
             };
         }
         case LOGOUT_FORM_SUCCESS: {
@@ -111,14 +130,14 @@ export const formReducer = (state = initialState, action) => {
                 ...state,
                 logoutFormSuccess: true,
                 logoutFormFailed: false,
-                userInfo: null,
+                userInfo: null
             };
         }
         case LOGOUT_FORM_FAILED: {
             return {
                 ...state,
                 logoutFormFailed: true,
-                logoutFormSuccess: false,
+                logoutFormSuccess: false
             };
         }
         default:

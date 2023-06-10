@@ -6,7 +6,7 @@ import {
 import styles from "./registration.module.css";
 
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../components/hooks/hooks";
 import { loginUser } from "../../services/actions/formActions";
 import { baseUrl } from "../../env";
 import { TFormValues } from "../../utils/types/types";
@@ -29,8 +29,7 @@ export const SignInPage = () => {
 
     const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        !!formValues && sessionStorage.setItem("UserInfoRegistration", JSON.stringify(formValues));
         dispatch(loginUser(_loginUrl, formValues));
     };
 
@@ -54,7 +53,7 @@ export const SignInPage = () => {
                         icon={"ShowIcon"}
                         placeholder="Пароль"
                         extraClass="mt-6"
-                        value={password}
+                        value={password || ""}
                         onChange={changeInputValue}
                     />
                     <Button

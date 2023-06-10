@@ -19,7 +19,7 @@ const AppHeader = () => {
                     <BurgerIcon type="secondary"/>
                     <span className="ml-2">Конструктор</span>
                 </NavLink>
-                <NavLink to="/profile/orders" className={({ isActive }) => isActive ? `${linkActiveClass}` : `${linkClass}`}>
+                <NavLink to="/feed" className={({ isActive }) => isActive ? `${linkActiveClass}` : `${linkClass}`}>
                     <ListIcon type="secondary"/>
                     <span className="ml-2">Лента заказов</span>
                 </NavLink>

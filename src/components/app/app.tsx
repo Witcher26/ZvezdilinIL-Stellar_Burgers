@@ -1,6 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { getIngredients, CLOSE_MODAL  } from '../../services/actions/actions';
+import { useDispatch, useSelector } from '../hooks/hooks';
+import { getIngredients } from '../../services/actions/ingredientsActions';
+import { CLOSE_MODAL } from '../../services/constants';
 import { baseUrl } from '../../env';
 import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 
@@ -17,6 +18,9 @@ import { NotFoundPage } from '../../pages/not-found-page';
 import Modal from '../modal/modal';
 import { checkUserAuth } from '../../services/actions/formActions';
 import AppHeader from '../app-header';
+import { FeedPage } from '../../pages/feed';
+import { OrderCardPage } from '../../pages/order-card-page';
+import { BurgerCardExpanded } from '../burger-order-list/burger-order-expanded/burger-order-expanded';
 
 const ingredientsUrl = `${baseUrl}/ingredients`;
 
@@ -24,26 +28,14 @@ function App() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const dispatchModal = useDispatch();
-
-    const user = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.formReducer.userInfo
-    );
+    const user = useSelector(store => store.formReducer.userInfo);
 
     React.useEffect(() => {
-        dispatch(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        getIngredients(ingredientsUrl));
-
+        dispatch(getIngredients(ingredientsUrl));
         if (user) {
-            dispatch(
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-            checkUserAuth());
+            dispatch(checkUserAuth());
         }
-    }, [dispatch, user]);
+    }, []);
 
     const location = useLocation();
     const background = location.state && location.state.background;
@@ -52,6 +44,11 @@ function App() {
         navigate(-1);
         dispatchModal({ type: CLOSE_MODAL });
     }
+
+    const cardModal = useSelector(store => store.modalReducer.cardModal);
+    const currentFeedOrder = useSelector(store => store.feedReducer.currentOrder);
+    const cardOrderModal = useSelector(store => store.modalReducer.cardOrderModal);
+    const currentOrder = useSelector(store => store.feedOrderReducer.currentOrder);
 
     return (
         <React.Fragment>
@@ -64,8 +61,11 @@ function App() {
                 <Route path="/reset-password" element={<UnAuthorized component={<ResetPasswordPage />} />} />
                 <Route path="/profile" element={<Authorized component={<ProfilePage />} />}/>
                 <Route path="/profile/orders" element={<Authorized component={<OrderPage />} />} />
+                <Route path="/profile/orders/:id" element={<Authorized component={<OrderCardPage />} />}/>
                 <Route path="/ingredients/:ingredientId" element={<IngredientDetails />}/>
                 <Route path="*" element={<NotFoundPage />}/>
+                <Route path="/feed" element={<FeedPage />}/>
+                <Route path="/feed/:id" element={<OrderCardPage/>}/>
             </Routes>
             {background && (
                 <Routes>
@@ -79,6 +79,32 @@ function App() {
                             >
                                 <IngredientDetails/>
                             </Modal>
+                        }
+                    />
+                    <Route
+                        path="/feed/:id"
+                        element={
+                            cardModal && (
+                                <Modal
+                                    handleCloseModal={handleCloseModal}
+                                    className="pt-10 pl-10 pb-15 pr-10"
+                                >
+                                    <BurgerCardExpanded order={currentFeedOrder}/>
+                                </Modal>
+                            )
+                        }
+                    />
+                    <Route
+                        path="/profile/orders/:id"
+                        element={
+                            cardOrderModal && (
+                                <Modal
+                                    handleCloseModal={handleCloseModal}
+                                    className="pt-10 pl-10 pb-15 pr-10"
+                                >
+                                    <Authorized component={<BurgerCardExpanded order={currentOrder} />}/>
+                                </Modal>
+                            )
                         }
                     />
                 </Routes>

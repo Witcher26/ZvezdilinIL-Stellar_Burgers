@@ -1,5 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "./hooks/hooks";
 import { Navigate, useLocation } from "react-router-dom";
+import styles from "./protected-route.module.css"
+import { Loader } from "./loader/loader";
 
 type TProtectedRoute = {
     unAuthorized: boolean;
@@ -7,11 +9,7 @@ type TProtectedRoute = {
   };
 
 export const ProtectedRoute = ({ unAuthorized = false, component }: TProtectedRoute) => {
-    const user = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.formReducer.userInfo
-    );
+    const user = useSelector(store => store.formReducer.userInfo);
     const location = useLocation();
 
     if (user && unAuthorized) {

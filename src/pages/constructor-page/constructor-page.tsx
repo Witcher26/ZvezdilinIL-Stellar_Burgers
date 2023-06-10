@@ -2,17 +2,11 @@ import BurgerIngredients from '../../components/burger-ingredients';
 import {BurgerConstructor} from '../../components';
 import Modal from '../../components/modal/modal';
 import OrderDetails from '../../components/burger-ingredients/ingredient-details/order-details';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../components/hooks/hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import app from './app.module.css';
-import {
-    SET_ACTIVE_INGREDIENT,
-    DRAG_CONSTRUCTOR_INGREDIENTS,
-    INCREASE_INGREDIENT,
-    DRAG_BUN_INGREDIENT,
-    CLOSE_MODAL
-} from '../../services/actions/actions';
+import { SET_ACTIVE_INGREDIENT,DRAG_CONSTRUCTOR_INGREDIENTS, INCREASE_INGREDIENT, DRAG_BUN_INGREDIENT, CLOSE_MODAL } from '../../services/constants';
 import { v4 as uuid } from "uuid";
 import { TIngredient } from '../../utils/types/types';
 
@@ -20,14 +14,11 @@ const ConstructorPage = () => {
     const dispatch = useDispatch();
     const dispatchModal = useDispatch();
 
-    const orderModal = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.modalReducer.orderModal);
+    const orderModal = useSelector(store => store.modalReducer.orderModal);
     
     const handleCloseModal = () => {
         dispatchModal({ type: CLOSE_MODAL });
-        dispatchModal({ type: SET_ACTIVE_INGREDIENT, currentIngredient: {} });
+        dispatchModal({ type: SET_ACTIVE_INGREDIENT, currentIngredient: null});
     };
 
     const onDropHandler = (item: TIngredient) => {
@@ -62,8 +53,6 @@ const ConstructorPage = () => {
                 </DndProvider>
             </div>
             {orderModal &&
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
                 <Modal handleCloseModal={handleCloseModal}>
                     <OrderDetails/>
                  </Modal>} 

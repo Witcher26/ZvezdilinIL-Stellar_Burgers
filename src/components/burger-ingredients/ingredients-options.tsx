@@ -1,25 +1,19 @@
 import  { forwardRef } from "react";
 import burgerIngredientsList from "./burger-ingredients-list.module.css";
 import IngredientItem from "./ingredient-item/ingredient-item";
-import {
-    SET_ACTIVE_INGREDIENT,
-    OPEN_INGREDIENTS_MODAL
-} from "../../services/actions/actions";
-import { useSelector, useDispatch } from "react-redux";
+
+import { SET_ACTIVE_INGREDIENT, OPEN_INGREDIENTS_MODAL } from "../../services/constants";
+import { useSelector, useDispatch } from "../hooks/hooks";
 import { TIngredient } from "../../utils/types/types";
 
 type TRef = HTMLDivElement | null;
+
 type TIngredientsType = {
-  ingredientsType: string;
+    ingredientsType: string;
 };
 
 const IngredientsOptions= forwardRef<TRef, TIngredientsType>(function BurgerIngredientsList({ingredientsType}, ref) {
-    const ingredientsData = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.ingredientsReducer.ingredientsData
-    );
-    
+    const ingredientsData = useSelector(store => store.ingredientsReducer.ingredientsData);
     const dispatch = useDispatch();
 
     const addTitle = (string: string) => {
@@ -46,8 +40,12 @@ const IngredientsOptions= forwardRef<TRef, TIngredientsType>(function BurgerIngr
     };
 
     const handleClick = (item: TIngredient) => {
-      dispatch({ type: SET_ACTIVE_INGREDIENT, currentIngredient: item });
-      dispatch({ type: OPEN_INGREDIENTS_MODAL });
+        dispatch({
+            type: SET_ACTIVE_INGREDIENT,
+            currentIngredient: item });
+        dispatch({
+            type: OPEN_INGREDIENTS_MODAL
+        });
     };
 
     const newData = ingredientsData.map((item: TIngredient) => {

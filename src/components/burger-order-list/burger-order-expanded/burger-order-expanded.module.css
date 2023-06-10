@@ -1,0 +1,52 @@
+.container {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  
+  .list {
+    padding: 0;
+    height: 320px;
+    overflow: auto;
+  }
+  
+  .container li img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid #801ab2;
+    object-fit: cover;
+  }
+  
+  .item {
+    display: flex;
+    display: flex;
+    align-items: center;
+  }
+  
+  .info_column {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .name {
+    margin-left: 16px;
+    margin-right: auto;
+  }
+  
+  .price {
+    display: flex;
+    align-items: center;
+  }
+  
+  .price span {
+    margin-right: 8px;
+  }
+  
+  .status {
+    color: #00cccc;
+  }
+  
+  .order_number {
+    text-align: center;
+  }  

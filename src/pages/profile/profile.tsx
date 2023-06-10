@@ -5,22 +5,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from "./profile.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../components/hooks/hooks";
 import { updateUserData } from "../../services/actions/formActions";
 import { baseUrl } from "../../env";
 import NavigationMenu from "../../components/navigation-menu/navigation-menu";
 import { TFormValues } from "../../utils/types/types";
 
 export const ProfilePage = () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const user = useSelector(store => store.formReducer.userInfo);
     const dispatch = useDispatch();
 
     const [formValues, setFormValues] = useState<TFormValues>({
-        name: !! user.name ? user.name : "",
-        email: !!user.email ? user.email : "",
-        password: !!user.password ? user.password : ""
+        name: user ? user.name : "",
+        email: user ? user.email : "",
+        password: "",
     });
 
     const changeInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -31,18 +29,19 @@ export const ProfilePage = () => {
 
     const changeUserData = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         dispatch(updateUserData(_updateUserUrl, formValues));
     };
 
     const handleReset = () => {
-        setFormValues({
-            ...formValues,
-            name: user.name,
-            email: user.email,
-            password: user.password,
-        });
+        if (user) {
+            setFormValues({
+                ...formValues,
+                name: user.name,
+                email: user.email,
+                password: user.password
+            });
+
+        }
     };
 
     return (
@@ -76,12 +75,14 @@ export const ProfilePage = () => {
                         icon={"EditIcon"}
                         placeholder="Пароль"
                         name="password"
-                        value={formValues.password}
+                        value={formValues.password || ""}
+                        // value="******"
+                        // value={formValues.password} //TODO 
                         extraClass="mb-6"
                         onChange={changeInputValue}
                     />
                     <div className={styles.buttons}>
-                        {(formValues.name !== user.name ||
+                        {user && (formValues.name !== user.name ||
                             formValues.password !== user.password ||
                                 formValues.email !== user.email) && (
                                     
