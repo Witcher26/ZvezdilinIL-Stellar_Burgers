@@ -1,7 +1,7 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorList from "./burger-constructor-list/burger-constructor-list";
 import OrderingInfo from "./ordering-info/ordering-info";
-import { useSelector } from "react-redux";
+import { useSelector } from "../hooks/hooks";
 
 import burgerConstructor from "./burger-constructor.module.css";
 import { useDrop } from "react-dnd";
@@ -13,19 +13,10 @@ import {
   } from "../../utils/types/types";
 
 const BurgerConstructor = ({ onDrop }: TDropType): JSX.Element => {
-    const constructorIngredients = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.ingredientsReducer.constructorIngredients
-    );
+    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients); //TODO сюда переместить handleCloseModal
+    const bunData = useSelector(store => store.ingredientsReducer.bun);
 
-    const bunData = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.ingredientsReducer.bun
-    );
-
-    //нет store.modalReducer.orderModal
+    //TODO нет store.modalReducer.orderModal
     
     const bunsPrice = bunData ? bunData.price * 2 : 0;
 
@@ -33,19 +24,13 @@ const BurgerConstructor = ({ onDrop }: TDropType): JSX.Element => {
         (accum: number, item: TConstructorIngredient) => accum + item.price, 0
     ) + bunsPrice;
 
-    const {
-        image,
-        name,
-        price
-    } = bunData || {};
-
     const [{ isHover }, dropRef] = useDrop({
         accept: "bun",
         drop(item: TIngredient) {
             onDrop(item);
         },
         collect: (monitor) => ({
-            isHover: monitor.isOver(),
+            isHover: monitor.isOver()
         }),
     });
 
@@ -63,6 +48,7 @@ const BurgerConstructor = ({ onDrop }: TDropType): JSX.Element => {
 
         const type = addValueFromDir(direction, "top", "bottom");
         if (bunData) {
+            const {image, name, price} = bunData;
             return (
                 <div className={
                     `${ isHover

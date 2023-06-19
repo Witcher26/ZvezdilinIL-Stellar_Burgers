@@ -1,0 +1,24 @@
+.container {
+    width: 100%;
+    max-width: 580px;
+  }
+  
+  .info {
+    margin-bottom: 60px;
+    display: flex;
+  }
+  
+  .info ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .text {
+    color: #00cccc;
+  }
+  
+  .list_container {
+    display: flex;
+    gap: 20px;
+  }

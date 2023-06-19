@@ -6,11 +6,13 @@
     display: flex ;
     flex-direction: column;
     align-items: center;
+    top: 80px;
+    position: relative;
 }
 
 .checkMarkIcon_position {
     display: flex;
     align-items: center;
     position: relative;
-    bottom: 110px;
+      bottom: -140px; 
 }

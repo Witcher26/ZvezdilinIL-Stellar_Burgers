@@ -1,17 +1,24 @@
-export function checkResponse(res: Response) {
+export const checkResponse = async<T>(res: Response): Promise<T> => {
     if (res.ok) {
         return res.json()
     }
-    return Promise.reject(`Ошибка ${res.status}`)
+    const error = await res.json();
+    return Promise.reject(error)
 }
 
-/* Проверка на объект */
-export const isObject = (obj: object) => typeof obj === 'object' && obj !== null;
+export const addIngredients = <T extends { _id: string }, U>(fstArray: T[], scndArray: U[]) => {
+    const array: T[] = [];
 
-/*Создаёт новый объект, в котором ключи без значений заменяются ключами со значением пустой строки*/
-export const filterObjectByFilledValues = (params: any | unknown) => isObject(params)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ? Object.keys(params).reduce((currentObject, key) => params[key] ? {...currentObject, [key]: params[key]} : currentObject, "")
-    : {};
-    
+    const findIntersection = (fstArray: T[], scndArray: U[]) => {
+        fstArray.forEach(item => {
+            scndArray.forEach(id => {
+                if (item._id === id) {
+                    array.push(item);
+                }
+            });
+        });
+    };
+    findIntersection(fstArray, scndArray);
+
+    return array;
+};

@@ -5,6 +5,6 @@ export class GlobalSessionStorage {
 
     getValue(key: string, defaultValue: string) {
         const value = sessionStorage.getItem(key);
-        return !!value ? JSON.parse(value) : defaultValue;
+        return !!value && value !== 'undefined' ? JSON.parse(value) : defaultValue;
     }
 }

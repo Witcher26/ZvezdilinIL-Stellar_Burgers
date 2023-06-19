@@ -5,8 +5,8 @@ import {
     ConstructorElement,
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { REMOVE_INGREDIENT } from "../../../../services/actions/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { REMOVE_INGREDIENT } from "../../../../services/constants";
+import { useDispatch, useSelector } from "../../../hooks/hooks";
 import { TConstructorIngredient } from "../../../../utils/types/types";
 
 type TConstructorItemProps = {
@@ -30,7 +30,7 @@ const BurgerConstructorListItem = ({ item, index, moveIngredient }: TConstructor
             return { _id, index };
         },
         collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
+            isDragging: monitor.isDragging()
         }),
     });
 
@@ -70,10 +70,7 @@ const BurgerConstructorListItem = ({ item, index, moveIngredient }: TConstructor
         },
     });
 
-    const constructorIngredients = useSelector(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        store => store.ingredientsReducer.constructorIngredients);
+    const constructorIngredients = useSelector(store => store.ingredientsReducer.constructorIngredients);
 
     const dispatch = useDispatch();
 

@@ -1,3 +1,22 @@
+## 6.0.0-master (19.06.2023 - release )
+- `bugfix`: убрана ошибка белого экрана для GlobalSessionStorage
+- `feature`: добавлен компонент OrderReport (лента заказов)
+- `feature`: добавлен компонент BurgerCardExpanded
+- `feature`: добавлен компонент Loader
+- `feature`: добавлен компонент NavigationMenu
+- `feature`: добавлены feedActions.js
+- `feature`: добавлен feedReducer
+- `feature`: добавлен feedOrderReducer
+- `feature`: добавлен socketMiddleware
+- `fix`: методы запросов вынесены в файл api.ts
+- `feature`: типизированы хуки useDispatch и useSelector
+- `feature`: типизировано хранилище
+- `feature`: типизированы экшены
+- `feature`: типизированы редьюсеры
+- `feature`: Добавлен роутер /profile/orders/:id
+- `feature`: Добавлен роутер /profile/orders/
+- `feature`: Добавлен роутер /feed/:id
+- `feature`: Добавлен роутер /feed
 
 ## 5.0.0-master (01.06.2023 - release )
 - `fix`: В директорию utils добавлен метод, создающий новый объект, в котором ключи без значений заменяются ключами со значением пустой строки
