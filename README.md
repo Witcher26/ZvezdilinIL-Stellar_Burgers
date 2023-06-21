@@ -2,16 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory type a command in the terminal:
-
-### `yarn istall`
-Istall all node_modules
-
-In file package.json run script
-### `start`
-or type a command in the terminal: `npm start`
+## this project is available at the link
+https://witcher26.github.io/ZvezdilinIL-Stellar_Burgers/
 
 ![Бургерная](https://github.com/Witcher26/Stellar_Burgers/assets/66370784/25cd4d87-0d1e-456f-8b6d-b36eb59d8933)
 
