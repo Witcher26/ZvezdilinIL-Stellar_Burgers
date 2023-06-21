@@ -1,3 +1,6 @@
+## 6.1.0-master (21.06.2023 - release )
+- `feature`: добавлен скрипт `deploy` и `predeploy` в package.json. `Predeploy` вызывается автоматически при вызове скрипта `deploy`. Добавлена директория для `homepage`
+- `feature`: установлен пакет gh-pages для деплоя на gh-pages
 ## 6.0.0-master (19.06.2023 - release )
 - `bugfix`: убрана ошибка белого экрана для GlobalSessionStorage
 - `feature`: добавлен компонент OrderReport (лента заказов)
