@@ -13,7 +13,7 @@ const TabList = forwardRef<TRef, TFunc>(function TabList({ scrollByTabClick }, r
     const handleClick = (element: string) => {scrollByTabClick(element)};
 
     return (
-        <div className={`${styles.tab_list}`} ref={ref}>
+        <div className={`${styles.tab_list}`} ref={ref} data-cy="bulk-id">
             <Tab value="bun" active={current === "bun"} onClick={handleClick}>
                 Булки
             </Tab>

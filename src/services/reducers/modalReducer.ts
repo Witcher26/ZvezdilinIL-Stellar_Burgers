@@ -17,7 +17,7 @@ type TModalState = {
     orderInfo: null | TOrder;
   };
 
-  const initialState: TModalState = {
+  export const initialState: TModalState = {
     ingredientsModal: false,
     orderModal: false,
     cardModal: false,

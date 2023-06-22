@@ -1,3 +1,20 @@
+
+## 7.1.0-master (25.06.2023 - release )
+- `feature`: приложение задеплоино и доступно по url: https://witcher26.github.io/ZvezdilinIL-Stellar_Burgers
+- `feature`: добавлено браузерное cypress-тестирование доступности домашней страницы "/" и"/feed"-страницы
+- `feature`: добавлено браузерное cypress-тестирование функциональности создания заказа
+- `feature`: добавлено браузерное cypress-тестирование функциональности модальных окон (открытие и закрытие карточки с ингредиентом)
+- `feature`: добавлено браузерное cypress-тестирование функциональности перетаскивания ингредиентов (drag-and-drop)
+- `feature`: добавлены юнит - тесты для orderReducer
+- `feature`: добавлены юнит - тесты для modalReducer
+- `feature`: добавлены юнит - тесты для ingredientsReducer
+- `feature`: добавлены юнит - тесты для formReducer
+- `feature`: добавлены юнит - тесты для feedReducer
+- `feature`: добавлены юнит - тесты для feedOrderReducer
+- `feature`: добавлены рендереры и моки: react-test-renderer --dev, fetch-mock --dev, redux-mock-store --dev, @testing-library/react --dev, 
+- `feature`: добавлены фраймворк и тест-раннер Jest для исполнения junit-тестов в Node.js; 
+- `feature`: добавлены скрипты для браузерного тест-раннера интеграционных и сквозных тестов Cypress
+
 ## 6.1.0-master (21.06.2023 - release )
 - `feature`: добавлен скрипт `deploy` и `predeploy` в package.json. `Predeploy` вызывается автоматически при вызове скрипта `deploy`. Добавлена директория для `homepage`
 - `feature`: установлен пакет gh-pages для деплоя на gh-pages

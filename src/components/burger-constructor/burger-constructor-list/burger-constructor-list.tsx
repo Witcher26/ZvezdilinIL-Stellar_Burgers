@@ -62,6 +62,7 @@ const BurgerConstructorList = ({ onDrop }: TDropType) => {
                         } constructor-element mt-4 mr-2 ${
                             isOver ? burgerConstructorList.hovered_block : ""
                         }`}
+                        data-cy="constructor-inside"
                     >
                         Добавьте ингредиенты сюда
                     </li>

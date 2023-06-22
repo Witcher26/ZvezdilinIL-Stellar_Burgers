@@ -2,10 +2,27 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## this project is available at the link
-https://witcher26.github.io/ZvezdilinIL-Stellar_Burgers/
+# My project is available at the link below
+https://witcher26.github.io/ZvezdilinIL-Stellar_Burgers
 
-![Бургерная](https://github.com/Witcher26/Stellar_Burgers/assets/66370784/25cd4d87-0d1e-456f-8b6d-b36eb59d8933)
+<img src="/src/images/homePage.JPG" alt="Космическая Бургерная by ZvezdilinIL - домашняя страница" width=70% height=70%>
+<img src="/src/images/pageFeed.png" alt="Космическая Бургерная by ZvezdilinIL - '/feed' - страница" width=70% height=70%>
+
+## 7.1.0-master (25.06.2023 - release )
+- `feature`: приложение задеплоино и доступно по url: https://witcher26.github.io/ZvezdilinIL-Stellar_Burgers
+- `feature`: добавлено браузерное cypress-тестирование доступности домашней страницы "/" и"/feed"-страницы
+- `feature`: добавлено браузерное cypress-тестирование функциональности создания заказа
+- `feature`: добавлено браузерное cypress-тестирование функциональности модальных окон (открытие и закрытие карточки с ингредиентом)
+- `feature`: добавлено браузерное cypress-тестирование функциональности перетаскивания ингредиентов (drag-and-drop)
+- `feature`: добавлены юнит - тесты для orderReducer
+- `feature`: добавлены юнит - тесты для modalReducer
+- `feature`: добавлены юнит - тесты для ingredientsReducer
+- `feature`: добавлены юнит - тесты для formReducer
+- `feature`: добавлены юнит - тесты для feedReducer
+- `feature`: добавлены юнит - тесты для feedOrderReducer
+- `feature`: добавлены рендереры и моки: react-test-renderer --dev, fetch-mock --dev, redux-mock-store --dev, @testing-library/react --dev, 
+- `feature`: добавлены фраймворк и тест-раннер Jest для исполнения junit-тестов в Node.js; 
+- `feature`: добавлены скрипты для браузерного тест-раннера интеграционных и сквозных тестов Cypress
 
 ## 6.1.0-master (21.06.2023 - release )
 - `feature`: добавлен скрипт `deploy` и `predeploy` в package.json. `Predeploy` вызывается автоматически при вызове скрипта `deploy`. Добавлена директория для `homepage`

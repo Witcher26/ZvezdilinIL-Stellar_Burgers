@@ -21,13 +21,13 @@ function IngredientDetails(): JSX.Element | null {
         } = element;
 
         return (
-            <div className={`${ingredientDetailsStyle.ingredient_card} pl-25 pr-25`}>
+            <div className={`${ingredientDetailsStyle.ingredient_card} pl-25 pr-25`} data-testid="ingredient-details">
                 <img
                     className={ingredientDetailsStyle.ingredient_image}
                     src={image_large}
                     alt={name}
                 />
-                <h3 className="pt-4 pb-8 text text_type_main-medium">{name}</h3>
+                <h3 data-cy="ingredient title" className="pt-4 pb-8 text text_type_main-medium">{name}</h3>
                 <ul className={`${ingredientDetailsStyle.nutrients_list}`}>
                     <li className="mr-5">
                         <p className="text text_type_main-default text_color_inactive">

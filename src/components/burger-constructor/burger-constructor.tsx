@@ -62,7 +62,7 @@ const BurgerConstructor = ({ onDrop }: TDropType): JSX.Element => {
                         text={`${name} (${direction})`}
                         price={price}
                         thumbnail={image}
-                        extraClass="ml-2"
+                        extraClass="constructor-ingredient-data-cy ml-2"
                     />
                 </div>
             );
@@ -79,9 +79,9 @@ const BurgerConstructor = ({ onDrop }: TDropType): JSX.Element => {
     };
     
     return (
-        <div ref={dropRef} className="ml-20 mt-25">
+        <div ref={dropRef} className="ml-20 mt-25" data-cy="constructor">
             {renderBun(bunData, "верх")}
-            <BurgerConstructorList onDrop={onDrop} />
+            <BurgerConstructorList onDrop={onDrop}/>
             {renderBun(bunData, "низ")}
             <OrderingInfo finalPrice={finalPrice} />
         </div>

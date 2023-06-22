@@ -41,10 +41,11 @@ const Modal = ({ modalTitle, className, children, handleCloseModal}: TModalProps
             <div className={`${modalStyles.modal} ${className}`}>
                 <ModalHeader>
                     <>
-                    {modalTitle && <h2 className="text text_type_main-large">
+                    {modalTitle && <h2 data-cy="title" className="text text_type_main-large">
                         {modalTitle}
                     </h2>}
                         <button
+                            data-cy="close"
                             className={modalStyles.close_btn}
                             onClick={handleCloseModal}
                         >
