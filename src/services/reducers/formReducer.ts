@@ -33,7 +33,7 @@ type TFormState = {
     logoutFormFailed: boolean;
   };
 
-const initialState: TFormState = {
+export const initialState: TFormState = {
     resetFormFailed: false,
     resetFormSuccess: false,
     updateFormFailed: false,

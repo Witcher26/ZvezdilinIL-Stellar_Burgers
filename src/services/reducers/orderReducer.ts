@@ -23,8 +23,7 @@ export const orderReducer = (state = orderState, action: TAppActions): TOrderSta
         case POST_ORDER_INFO_SUCCESS:
             return {
                 ...state,
-                order: action.payload.order,
-                data: [...state.data, { ...action.payload }]
+                order: action.payload
             };
             case POST_ORDER_INFO_FAILED:
                 return {

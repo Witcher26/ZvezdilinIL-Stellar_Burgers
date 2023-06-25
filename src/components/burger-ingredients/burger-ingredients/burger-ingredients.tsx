@@ -82,7 +82,7 @@ const BurgerIngredients = () => {
     
     return (
         <div className={burgerIngredients.burger_box}>
-            <h2 className="text text_type_main-large mt-10 mb-5">
+            <h2 className="text text_type_main-large mt-10 mb-5" data-cy="constructor title">
                 Соберите бургер
             </h2>
             <TabList scrollByTabClick={scrollByTabClick} ref={tabRef} />

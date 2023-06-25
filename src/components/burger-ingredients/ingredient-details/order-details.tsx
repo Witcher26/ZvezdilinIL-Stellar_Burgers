@@ -30,7 +30,7 @@ function OrderDetails() {
             }     
             <div className={orderDetails.text_position}>
             </div>
-            <p className="text text_type_main-default pb-2">
+            <p className="text text_type_main-default pb-2" data-cy="order-load">
                 Ваш заказ начали готовить
             </p>
             <p className="text text_type_main-default text_color_inactive">

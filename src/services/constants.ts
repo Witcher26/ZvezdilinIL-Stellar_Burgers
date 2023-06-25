@@ -1,4 +1,5 @@
 export const API_BASE = "https://norma.nomoreparties.space/api";
+export const WS_BASE = "wss://norma.nomoreparties.space";
 
 export const RESET_FORM_FAILED: "RESET_FORM_FAILED" = "RESET_FORM_FAILED";
 export const RESET_FORM_SUCCESS: "RESET_FORM_SUCCESS" = "RESET_FORM_SUCCESS";
