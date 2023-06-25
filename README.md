@@ -1,7 +1,3 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # My project is available at the link below
 https://witcher26.github.io/ZvezdilinIL-Stellar_Burgers
 
